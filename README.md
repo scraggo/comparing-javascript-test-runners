@@ -1,6 +1,7 @@
-# Try `mocha-parallel-tests`
+# mocha-parallel-tests
 
-`mocha-parallel-tests` executes each of your test files in a separate process while maintaining the output structure of mocha.
+[mocha-parallel-tests](https://github.com/mocha-parallel/mocha-parallel-tests)
+executes each of your test files in a separate process while maintaining the output structure of mocha.
 
 If you're using Node.JS >= 12 your tests execution will be even faster because `mocha-parallel-tests` supports running tests with Node.JS worker threads API.
 
@@ -26,7 +27,7 @@ Only separate test files are run in parallel. `describe` and `it` blocks in a gi
 
 > Given this fact, any slow tests can be put into their own files to increase the speed of running all the unit tests.
 
-## Drawbacks
+## For consideration and drawbacks
 
 - is a wrapper over `mocha`, not a plugin. May not be compatible with `mochapack` etc
 - 34 open issues
