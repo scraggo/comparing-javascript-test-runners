@@ -6,6 +6,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
+    "clean": "rm fullCircle*",
+    "make-tests": "node ./src/generateTests",
     "test": "mocha --recursive './test/*.spec.js' --timeout=10000",
     "test-parallel": "mocha-parallel-tests --recursive './test/*.spec.js' --timeout=10000"
   },

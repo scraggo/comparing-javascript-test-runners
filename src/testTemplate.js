@@ -7,9 +7,9 @@ describe('fullCircle', function() {
     const res = fullCircle('hi', 0);
     expect(res).to.equal('hi');
   });
-  range(200, 250).forEach(num => {
+  range(1, 25).forEach(num => {
     it(`returns self in ${num} milliseconds`, function() {
-      const res = fullCircle('hi', 0);
+      const res = fullCircle('hi', num);
       expect(res).to.equal('hi');
     });
   });

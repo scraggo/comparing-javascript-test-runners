@@ -22,9 +22,4 @@ describe('range', function() {
     expect(() => range(-2, -1)).to.throw;
     expect(() => range(2, 1)).to.throw;
   });
-
-  // it('returns self in 2 seconds', function() {
-  //   const res = fullCircle('hi', 2000);
-  //   expect(res).to.equal('hi');
-  // });
 });
