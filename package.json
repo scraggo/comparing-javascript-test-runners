@@ -6,7 +6,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "clean": "rm fullCircle*",
+    "clean": "rm ./test/fullCircle*",
     "make-tests": "node ./src/generateTests",
     "test": "mocha --recursive './test/*.spec.js' --timeout=10000",
     "test-parallel": "mocha-parallel-tests --recursive './test/*.spec.js' --timeout=10000"
@@ -14,10 +14,10 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^6.8.0",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-prettier": "^3.1.2",
     "mocha": "^6.2.2",
     "mocha-parallel-tests": "^2.2.2",
