@@ -1,7 +1,5 @@
-const fs = require('fs');
+const { promises: fsPromises } = require('fs');
 const { range } = require('./range');
-
-const { promises: fsPromises } = fs;
 
 const TEST_DIR = './test';
 
@@ -13,20 +11,19 @@ const getTemplateFile = async () =>
     encoding: 'utf8'
   });
 
-const makeALotOfTestFiles = template => {
-  return Promise.resolve(
-    range(0, 50).map(num => {
-      return fsPromises.writeFile(getTestFilename(num), template);
-    })
+const makeALotOfTestFiles = template =>
+  Promise.resolve(
+    range(0, 50).map(num =>
+      fsPromises.writeFile(getTestFilename(num), template)
+    )
   );
-};
 
 const main = async () => {
   try {
     const testFile = await getTemplateFile();
     await makeALotOfTestFiles(testFile);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
