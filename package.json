@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
     "test": "mocha './test/src/*.spec.js'",
-    "test-ava": "./shell/time.sh && ava './test/ava/*.spec.js' && ./shell/time.sh",
+    "test-all": "time npm run test-ava && time npm run test-jest && time npm run test-mocha && time npm run test-parallel",
+    "test-ava": " time ava './test/ava/*.spec.js'",
     "test-jest": "jest",
     "test-mocha": "mocha './test/mocha/*.spec.js'",
     "test-parallel": "mocha-parallel-tests './test/mocha/*.spec.js' --timeout=10000"
