@@ -1,6 +1,6 @@
-const { expect } = require('chai');
+// const { expect } = require('chai');
 
-const { range } = require('../src');
+const { range } = require('../../src');
 
 describe('range', function() {
   it('returns range array length 1', function() {

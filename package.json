@@ -9,9 +9,10 @@
     "clean": "rm ./test/**/fullCircle*",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
+    "test": "mocha './test/src/*.spec.js'",
     "test-jest": "jest",
-    "test-mocha": "mocha --recursive './test/**/*.spec.js' --timeout=10000",
-    "test-parallel": "mocha-parallel-tests --recursive './test/**/*.spec.js' --timeout=10000"
+    "test-mocha": "mocha './test/mocha/*.spec.js'",
+    "test-parallel": "mocha-parallel-tests './test/mocha/*.spec.js' --timeout=10000"
   },
   "dependencies": {},
   "devDependencies": {
