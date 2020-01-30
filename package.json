@@ -6,16 +6,18 @@
   "author": "scraggo@gmail.com",
   "license": "ISC",
   "scripts": {
-    "clean": "rm ./test/**/fullCircle*",
+    "clean": "rm ./test/{ava,jest,mocha}/*fullCircle*",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
     "test": "mocha './test/src/*.spec.js'",
+    "test-ava": "./shell/time.sh && ava './test/ava/*.spec.js' && ./shell/time.sh",
     "test-jest": "jest",
     "test-mocha": "mocha './test/mocha/*.spec.js'",
     "test-parallel": "mocha-parallel-tests './test/mocha/*.spec.js' --timeout=10000"
   },
   "dependencies": {},
   "devDependencies": {
+    "ava": "^3.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -27,5 +29,8 @@
     "mocha-parallel-tests": "^2.2.2",
     "nyc": "^15.0.0",
     "prettier": "^1.19.1"
+  },
+  "ava": {
+    "verbose": true
   }
 }
