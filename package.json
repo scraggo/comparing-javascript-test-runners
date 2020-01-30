@@ -6,11 +6,11 @@
   "author": "scraggo@gmail.com",
   "license": "ISC",
   "scripts": {
-    "clean": "rm ./test/fullCircle*",
+    "clean": "rm ./test/**/fullCircle*",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
-    "test": "mocha --recursive './test/*.spec.js' --timeout=10000",
-    "test-parallel": "mocha-parallel-tests --recursive './test/*.spec.js' --timeout=10000"
+    "test": "mocha --recursive './test/**/*.spec.js' --timeout=10000",
+    "test-parallel": "mocha-parallel-tests --recursive './test/**/*.spec.js' --timeout=10000"
   },
   "dependencies": {},
   "devDependencies": {

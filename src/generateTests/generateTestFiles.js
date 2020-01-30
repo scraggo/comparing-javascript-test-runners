@@ -1,6 +1,6 @@
 const { promises: fsPromises } = require('fs');
 const { range } = require('../range');
-const { DEST_PATHS, TEMPLATE_PATHS, TEST_RUNNERS } = require('./config');
+const { TEMPLATE_PATHS, TEST_RUNNERS } = require('./config');
 
 const getTestFilename = (num, testDir) => `${testDir}/fullCircle${num}.spec.js`;
 
@@ -21,12 +21,15 @@ const makeALotOfTestFiles = (template, testDir) =>
 const generateTestFiles = () => {
   try {
     TEST_RUNNERS.forEach(async testRunner => {
-      const testFile = await getTemplateFile(TEMPLATE_PATHS[testRunner]);
-      await makeALotOfTestFiles(testFile, DEST_PATHS[testRunner]);
+      const { dest, template } = TEMPLATE_PATHS[testRunner];
+      const testFile = await getTemplateFile(template);
+      await makeALotOfTestFiles(testFile, dest);
     });
   } catch (err) {
     console.error(err);
   }
 };
 
-generateTestFiles();
+module.exports = {
+  generateTestFiles,
+};
