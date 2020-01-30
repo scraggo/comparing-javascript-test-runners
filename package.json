@@ -9,7 +9,8 @@
     "clean": "rm ./test/**/fullCircle*",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
-    "test": "mocha --recursive './test/**/*.spec.js' --timeout=10000",
+    "test-jest": "jest",
+    "test-mocha": "mocha --recursive './test/**/*.spec.js' --timeout=10000",
     "test-parallel": "mocha-parallel-tests --recursive './test/**/*.spec.js' --timeout=10000"
   },
   "dependencies": {},
@@ -20,6 +21,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.1.0",
     "mocha": "^6.2.2",
     "mocha-parallel-tests": "^2.2.2",
     "nyc": "^15.0.0",
