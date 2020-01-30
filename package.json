@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "try mocha-parallel-tests package",
   "main": "index.js",
-  "author": "",
+  "author": "scraggo@gmail.com",
   "license": "ISC",
   "scripts": {
     "clean": "rm ./test/fullCircle*",
+    "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
     "test": "mocha --recursive './test/*.spec.js' --timeout=10000",
     "test-parallel": "mocha-parallel-tests --recursive './test/*.spec.js' --timeout=10000"
@@ -21,6 +22,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "mocha": "^6.2.2",
     "mocha-parallel-tests": "^2.2.2",
-    "nyc": "^15.0.0"
+    "nyc": "^15.0.0",
+    "prettier": "^1.19.1"
   }
 }
