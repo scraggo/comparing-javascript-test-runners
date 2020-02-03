@@ -1,3 +1,10 @@
 node_modules
 .nyc_output
 coverage
+.DS_Store
+.vscode/
+
+# Tests that can be rebuilt
+test/ava/*.spec.js
+test/jest/*.spec.js
+test/mocha/*.spec.js
