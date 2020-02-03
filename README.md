@@ -13,13 +13,17 @@ If you're using Node.JS >= 12 your tests execution will be even faster because `
 
 ## Comparing with mocha
 
-Run `npm run test` to run with `mocha`. Notice that the tests are run in serial.
+Run `npm run clean && npm run make-tests` to generate latest test suites.
 
-> Since each test suite took 2 seconds, the total run time is 4 seconds.
+Run `npm run test-mocha` to run with `mocha`. Notice that the tests are run in serial.
+
+> 1250 passing (15s)
 
 Run `npm run test-parallel` to run with `mocha-parallel-tests`. Notice that the tests are run in parallel.
 
-> Each test suite took 2 seconds, but they were run in parallel, so the total run time is 2 seconds.
+> 1250 passing (5s)
+
+Tests on my machine are running 300% faster. _Theoretically_, they could be 1000+% faster if they were all truly in parallel. In reality, the more tests you have and the longer individual test suites take, the gains will be diminished.
 
 ## Only separate test files are run in parallel
 

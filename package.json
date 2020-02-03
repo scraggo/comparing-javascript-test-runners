@@ -6,7 +6,7 @@
   "author": "scraggo@gmail.com",
   "license": "ISC",
   "scripts": {
-    "clean": "rm ./test/{ava,jest,mocha}/*fullCircle*",
+    "clean": "rm ./test/{ava,jest,mocha}/*fullCircle* || echo 'No tests to remove.'",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
     "test": "mocha './test/src/*.spec.js'",
