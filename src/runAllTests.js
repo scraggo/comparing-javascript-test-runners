@@ -8,6 +8,7 @@ const commands = ['ava', 'jest', 'mocha', 'parallel'].map(command => [
 ]);
 
 // UTILS
+
 const makeNPMScript = (argsArray, options = {}) => async () => {
   const { log } = options;
   const { stdout } = await execa('npm', argsArray);
@@ -32,16 +33,28 @@ const runScript = async scriptObj => {
 
 // MAIN
 
-// these aren't running in order, but it's working
-const main = async () => {
-  await Promise.all(
-    commands.map(async command => {
-      return runScript({
-        name: getNPMName(command),
-        script: makeNPMScript(command),
-      });
-    })
+// https://hackernoon.com/functional-javascript-resolving-promises-sequentially-7aac18c4431e
+const promiseSerial = funcs =>
+  funcs.reduce(
+    (promise, func) =>
+      promise.then(result => func().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
   );
+
+const main = async () => {
+  try {
+    await promiseSerial(
+      commands.map(command => {
+        return () =>
+          runScript({
+            name: getNPMName(command),
+            script: makeNPMScript(command),
+          });
+      })
+    );
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 main();
