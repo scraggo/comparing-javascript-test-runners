@@ -14,10 +14,22 @@ const makeNPMScript = (argsArray, options = {}) => async () => {
   }
 };
 
+/**
+ * @param {string[]} argsArray - the 'command', ex ['run', 'start']
+ * @returns {string}
+ */
 const formatNPMName = argsArray => `npm ${argsArray.join(' ')}`;
 
-const formatExecutionTime = (start, message = '()') => {
-  console.log(`"${message}" took ${(Date.now() - start) / 1000}s to execute.`);
+const formatExecutionTime = (executionTime, message = '()') => {
+  return `"${message}" took ${executionTime / 1000}s to execute.`;
+};
+
+// [{"command":["run","test-ava"],"executionTime":7989,"name":"ava"}]
+const formatResult = resultObj => {
+  const { command, executionTime, name } = resultObj;
+  const message = formatNPMName(command);
+  const title = `Test runner: ${name}`;
+  return [title, formatExecutionTime(executionTime, message), '---'].join('\n');
 };
 
 const runScript = async scriptObj => {
@@ -45,12 +57,12 @@ const testData = testRunners.reduce((acc, name) => {
 }, {});
 
 // just run one for now
-const sliced = testRunners.slice(0, 1);
+// const sliced = testRunners.slice(0, 1);
 
 const main = async () => {
   try {
     const testResults = await Promise.all(
-      sliced.map(async name => {
+      testRunners.map(async name => {
         const { run } = testData[name];
         const executionTime = await run();
         testData[name].executionTime = executionTime;
@@ -58,7 +70,12 @@ const main = async () => {
       })
     );
     // sort and prettify the results
-    console.log(JSON.stringify(testResults));
+    testResults
+      .sort((a, b) => a.executionTime - b.executionTime)
+      .map(formatResult)
+      .forEach(result => {
+        console.log(result);
+      });
   } catch (error) {
     console.error(error);
   }
