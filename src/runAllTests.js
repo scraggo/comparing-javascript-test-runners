@@ -1,11 +1,8 @@
 const execa = require('execa');
 
-// SCRIPTS
+// CONSTANTS
 
-const commands = ['ava', 'jest', 'mocha', 'parallel'].map(command => [
-  'run',
-  `test-${command}`,
-]);
+const testRunners = ['ava', 'jest', 'mocha', 'parallel'];
 
 // UTILS
 
@@ -17,41 +14,51 @@ const makeNPMScript = (argsArray, options = {}) => async () => {
   }
 };
 
-const getNPMName = argsArray => `npm ${argsArray.join(' ')}`;
+const formatNPMName = argsArray => `npm ${argsArray.join(' ')}`;
 
-// is this milliseconds or microseconds?
-const logExecutionTime = (start, message = '()') => {
+const formatExecutionTime = (start, message = '()') => {
   console.log(`"${message}" took ${(Date.now() - start) / 1000}s to execute.`);
 };
 
 const runScript = async scriptObj => {
-  const now = Date.now();
-  const { name, script } = scriptObj;
+  const start = Date.now();
+  const { script } = scriptObj;
   await script();
-  logExecutionTime(now, name);
+  return Date.now() - start;
 };
 
 // MAIN
 
-// https://hackernoon.com/functional-javascript-resolving-promises-sequentially-7aac18c4431e
-const promiseSerial = funcs =>
-  funcs.reduce(
-    (promise, func) =>
-      promise.then(result => func().then(Array.prototype.concat.bind(result))),
-    Promise.resolve([])
-  );
+const testData = testRunners.reduce((acc, name) => {
+  const command = ['run', `test-${name}`];
+  acc[name] = {
+    command,
+    executionTime: -1,
+    name,
+    run: () =>
+      runScript({
+        name,
+        script: makeNPMScript(command),
+      }),
+  };
+  return acc;
+}, {});
+
+// just run one for now
+const sliced = testRunners.slice(0, 1);
 
 const main = async () => {
   try {
-    await promiseSerial(
-      commands.map(command => {
-        return () =>
-          runScript({
-            name: getNPMName(command),
-            script: makeNPMScript(command),
-          });
+    const testResults = await Promise.all(
+      sliced.map(async name => {
+        const { run } = testData[name];
+        const executionTime = await run();
+        testData[name].executionTime = executionTime;
+        return testData[name];
       })
     );
+    // sort and prettify the results
+    console.log(JSON.stringify(testResults));
   } catch (error) {
     console.error(error);
   }
