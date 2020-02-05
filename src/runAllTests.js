@@ -6,6 +6,12 @@ const testRunners = ['ava', 'jest', 'mocha', 'parallel'];
 
 // UTILS
 
+/**
+ * @param {string[]} argsArray - the 'command', ex ['run', 'start']
+ * @param {object} options
+ * @param {boolean} options.log output to console
+ * @returns {function} async function that runs npm script
+ */
 const makeNPMScript = (argsArray, options = {}) => async () => {
   const { log } = options;
   const { stdout } = await execa('npm', argsArray);
@@ -24,19 +30,37 @@ const formatExecutionTime = (executionTime, message = '()') => {
   return `"${message}" took ${executionTime / 1000}s to execute.`;
 };
 
-// [{"command":["run","test-ava"],"executionTime":7989,"name":"ava"}]
+/**
+ * @param {object} resultObj ex: {"command":["run","test-ava"],"executionTime":7989,"name":"ava"}
+ * @returns {string}
+ */
 const formatResult = resultObj => {
   const { command, executionTime, name } = resultObj;
   const message = formatNPMName(command);
-  const title = `Test runner: ${name}`;
-  return [title, formatExecutionTime(executionTime, message), '---'].join('\n');
+  const title = `${name.toUpperCase()}`;
+  return [title, formatExecutionTime(executionTime, message)].join('  ');
 };
 
+/**
+ * Runs script
+ * @param {object} scriptObj
+ * @returns {number} execution time in ms
+ */
 const runScript = async scriptObj => {
   const start = Date.now();
   const { script } = scriptObj;
   await script();
   return Date.now() - start;
+};
+
+// sort, format, and log test results
+const logResults = resultsArr => {
+  resultsArr
+    .sort((a, b) => a.executionTime - b.executionTime)
+    .map(formatResult)
+    .forEach(result => {
+      console.log(result);
+    });
 };
 
 // MAIN
@@ -49,7 +73,6 @@ const testData = testRunners.reduce((acc, name) => {
     name,
     run: () =>
       runScript({
-        name,
         script: makeNPMScript(command),
       }),
   };
@@ -64,18 +87,11 @@ const main = async () => {
     const testResults = await Promise.all(
       testRunners.map(async name => {
         const { run } = testData[name];
-        const executionTime = await run();
-        testData[name].executionTime = executionTime;
+        testData[name].executionTime = await run();
         return testData[name];
       })
     );
-    // sort and prettify the results
-    testResults
-      .sort((a, b) => a.executionTime - b.executionTime)
-      .map(formatResult)
-      .forEach(result => {
-        console.log(result);
-      });
+    logResults(testResults);
   } catch (error) {
     console.error(error);
   }
