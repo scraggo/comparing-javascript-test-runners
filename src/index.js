@@ -3,5 +3,5 @@ const { range } = require('./range');
 
 module.exports = {
   fullCircle,
-  range
+  range,
 };

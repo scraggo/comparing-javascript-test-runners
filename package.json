@@ -9,27 +9,29 @@
     "clean": "rm ./test/{ava,jest,mocha}/*fullCircle* || echo 'No tests to remove.'",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
-    "test": "mocha './test/src/*.spec.js'",
-    "test-all": "time npm run test-ava && time npm run test-jest && time npm run test-mocha && time npm run test-parallel",
+    "test": "nyc mocha './test/src/*.spec.js'",
+    "test-all": "node src/runAllTests",
     "test-ava": " time ava './test/ava/*.spec.js'",
     "test-jest": "jest",
     "test-mocha": "mocha './test/mocha/*.spec.js'",
     "test-parallel": "mocha-parallel-tests './test/mocha/*.spec.js' --timeout=10000"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "ava": "^3.1.0",
     "chai": "^4.2.0",
+    "execa": "^4.0.0",
+    "jest": "^25.1.0",
+    "mocha": "^6.2.2",
+    "mocha-parallel-tests": "^2.2.2",
+    "nyc": "^15.0.0"
+  },
+  "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "jest": "^25.1.0",
-    "mocha": "^6.2.2",
-    "mocha-parallel-tests": "^2.2.2",
-    "nyc": "^15.0.0",
-    "prettier": "^1.19.1"
+    "prettier": "1.19.1"
   },
   "ava": {
     "verbose": true
