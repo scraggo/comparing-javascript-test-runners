@@ -90,8 +90,9 @@ const main = async () => {
      * running in parallel, some of those are running parallel
      * processes themselves. It seemed prudent to not overload the
      * main process running the tests. */
-    for (let i = 0; i < testRunners.length; i += 1) {
-      const name = testRunners[i];
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const name of testRunners) {
       const { run } = testData[name];
 
       console.log('running tests for', name, '\n. . . . . . . . ');
