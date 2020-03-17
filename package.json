@@ -1,7 +1,7 @@
 {
-  "name": "mocha-parallel-try",
+  "name": "comparing-javascript-testing-frameworks",
   "version": "1.0.0",
-  "description": "try mocha-parallel-tests package",
+  "description": "A comparison of JavaScript testing frameworks",
   "main": "index.js",
   "author": "scraggo@gmail.com",
   "license": "ISC",
