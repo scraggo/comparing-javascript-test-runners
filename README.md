@@ -1,38 +1,35 @@
-# mocha-parallel-tests
+# Comparing JavaScript Testing Frameworks
 
-[mocha-parallel-tests](https://github.com/mocha-parallel/mocha-parallel-tests)
-executes each of your test files in a separate process while maintaining the output structure of mocha.
+https://github.com/scraggo/compare-javascript-testing-frameworks
 
-If you're using Node.JS >= 12 your tests execution will be even faster because `mocha-parallel-tests` supports running tests with Node.JS worker threads API.
+Frameworks for comparison:
 
-## What do "serial" and "parallel" mean?
+- Ava
+- Jest
+- Mocha (and an interesting plugin called mocha-parallel-tests)
 
-"Serial" - one at a time, ie - the first must complete before the second, the second must complete before the third, etc.
+This repo is a node application that has the capability of running multiple tests in all three of these frameworks.
 
-"Parallel" - happening simultaneously, ie - the first, second, third, etc can happen at the same time.
+## Running the tests
 
-## Comparing with mocha
+`npm install` to install all the packages.
 
-Run `npm run clean && npm run make-tests` to generate latest test suites.
+`npm run clean` (optional) to clear out all the generated test files.
 
-Run `npm run test-mocha` to run with `mocha`. Notice that the tests are run in serial.
+`npm run make-tests` to generate test files.
 
-> 1250 passing (15s)
+`npm run test-all` to run all the generated tests and see a diagnostic output.
 
-Run `npm run test-parallel` to run with `mocha-parallel-tests`. Notice that the tests are run in parallel.
+`npm run test-ava` to run all the generated `ava` tests
 
-> 1250 passing (5s)
+`npm run test-jest` to run all the generated `jest` tests
 
-Tests on my machine are running 300% faster. _Theoretically_, they could be 1000+% faster if they were all truly in parallel. In reality, the more tests you have and the longer individual test suites take, the gains will be diminished.
+`npm run test-mocha` to run all the generated `mocha` tests
 
-## Only separate test files are run in parallel
+`npm run test-parallel` to run all the generated `mocha-parallel-tests` tests
 
-Only separate test files are run in parallel. `describe` and `it` blocks in a given suite are run serially.
+## Development
 
-> Given this fact, any slow tests can be put into their own files to increase the speed of running all the unit tests.
+`npm run lint` to lint files.
 
-## For consideration and drawbacks
-
-- is a wrapper over `mocha`, not a plugin. May not be compatible with `mochapack` etc
-- 34 open issues
-- New in 2019, 9,217 weekly downloads
+`npm run test` to run the internal codebase tests.
