@@ -84,13 +84,28 @@ const testData = testRunners.reduce((acc, name) => {
 
 const main = async () => {
   try {
-    const testResults = await Promise.all(
-      testRunners.map(async name => {
-        const { run } = testData[name];
-        testData[name].executionTime = await run();
-        return testData[name];
-      })
-    );
+    const testResults = [];
+
+    /** Why a for loop? I want to avoid having 4 test frameworks
+     * running in parallel, some of those are running parallel
+     * processes themselves. It seemed prudent to not overload the
+     * main process running the tests. */
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const name of testRunners) {
+      const { run } = testData[name];
+
+      console.log('running tests for', name, '\n. . . . . . . . ');
+
+      // eslint-disable-next-line no-await-in-loop
+      testData[name].executionTime = await run();
+      testResults.push(testData[name]);
+    }
+
+    console.log(`-*-*-*-*-*-*-*-*-*-*-
+      RESULTS
+-*-*-*-*-*-*-*-*-*-*-`);
+
     logResults(testResults);
   } catch (error) {
     console.error(error);
