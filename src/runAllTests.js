@@ -10,11 +10,11 @@ const testRunners = ['ava', 'jest', 'mocha', 'parallel'];
  * @param {string[]} argsArray - the 'command', ex ['run', 'start']
  * @param {object} options
  * @param {boolean} options.log output to console
- * @returns {function} async function that runs npm script
+ * @returns {function} function that runs npm script
  */
-const makeNPMScript = (argsArray, options = {}) => async () => {
+const makeNPMScript = (argsArray, options = {}) => () => {
   const { log } = options;
-  const { stdout } = await execa('npm', argsArray);
+  const { stdout } = execa.sync('npm', argsArray);
   if (log === true) {
     console.log(stdout);
   }
@@ -46,10 +46,10 @@ const formatResult = resultObj => {
  * @param {object} scriptObj
  * @returns {number} execution time in ms
  */
-const runScript = async scriptObj => {
+const runScript = scriptObj => {
   const start = Date.now();
   const { script } = scriptObj;
-  await script();
+  script();
   return Date.now() - start;
 };
 
@@ -82,14 +82,9 @@ const testData = testRunners.reduce((acc, name) => {
 // just run one for now
 // const sliced = testRunners.slice(0, 1);
 
-const main = async () => {
+const main = () => {
   try {
     const testResults = [];
-
-    /** Why a for loop? I want to avoid having 4 test frameworks
-     * running in parallel, some of those are running parallel
-     * processes themselves. It seemed prudent to not overload the
-     * main process running the tests. */
 
     // eslint-disable-next-line no-restricted-syntax
     for (const name of testRunners) {
@@ -98,7 +93,7 @@ const main = async () => {
       console.log('running tests for', name, '\n. . . . . . . . ');
 
       // eslint-disable-next-line no-await-in-loop
-      testData[name].executionTime = await run();
+      testData[name].executionTime = run();
       testResults.push(testData[name]);
     }
 
