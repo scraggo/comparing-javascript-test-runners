@@ -1,14 +1,6 @@
 # Comparing JavaScript Testing Frameworks
 
-https://github.com/scraggo/compare-javascript-testing-frameworks
-
-Frameworks for comparison:
-
-- Ava
-- Jest
-- Mocha (and an interesting plugin called mocha-parallel-tests)
-
-This repo is a node application that has the capability of running multiple tests in all three of these frameworks.
+This article is the explanatory companion to <https://github.com/scraggo/compare-javascript-testing-frameworks> - a node application that has the capability of running multiple tests in the testing frameworks I'll be comparing here.
 
 Outline
 
@@ -22,30 +14,31 @@ Outline
 
 The Problem
 
-Technology is always changing. As a result, the frameworks in use this year may be long forgotten in the years to come. Despite this, we can assume that code will need to be tested and there are general principles we can adhere to.
+Technology is always changing. As a result, the frameworks in use this year may be superseded by other frameworks in the future. Despite this, we can assume that code should be tested and there are general principles we can adhere to.
 
 Goals
 
-The overall goal of this project is to both explore test writing in general and how three popular testing frameworks may guide our testing practices.
+This project is an exploration of test writing in general and how three popular testing frameworks may guide our testing practices.
 
 The general principles we'll look into are:
 
-- State: should tests share state?
-- Documentation: tests outline the functionality of the application
-- Coverage: how far should you go?
-- Philosophy: where do we draw the line for "what" to test? What level of "granularity" are we aiming for (unit vs integration vs acceptance tests)?
+- State: the pros and cons of sharing state between tests
+- Documentation: writing tests that outline the functionality of the application
+- Coverage: the extent to which one should measure test coverage
+- Philosophy: "What" should we test? What level of "granularity" are we aiming for (unit vs integration vs acceptance tests)?
 
-The frameworks of choice are
+In recent years, JavaScript has become a viable language to learn given the drastic enhancements afforded by ES6 and later language specifications. As a result, many front-end frameworks have become massively popular. These frameworks are much easier to test than frameworks of years past. Three frameworks have risen far above the rest as the most popular choices:
 
-- Ava
-- Jest
-- Mocha (and an interesting plugin called mocha-parallel-tests)
+- Ava <https://github.com/avajs/ava>
+- Jest <https://jestjs.io/>
+- Mocha <https://mochajs.org/>
+  - and an interesting plugin called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
 
-Given all this, we can come up with some requirements for our testing frameworks and compare the pros and cons of each framework.
+Taking some requirements (that we will come up with) we can compare these frameworks on a number of points.
 
 ## Testing in general
 
-There are differing opinions on what the "best practices" are for testing code. My opinion takes a pragmatic tone - we should test what is necessary to gain confidence that our application is running correctly and we should do it in a way that leverages existing tools that have been tried by the community.
+There are differing opinions on what the "best practices" are for testing code. My opinion takes a pragmatic tone - we should test what is necessary to gain confidence that our application is running correctly and we should do it in a way that leverages existing tools that have been refined and have become trusted by the community.
 
 - clear separation of unit, integration, e2e tests
   - what do you consider the "unit"?
@@ -66,21 +59,33 @@ Tip: read the test specs of a library, read open issues
 
 ## Requirements
 
+### Speed
+
+A testing framework should not be slow. We can only define this _relatively_ - for one person's _slow_ may be another person's _acceptable_. We will be benchmarking speed for all the frameworks.
+
+### Ease of Use
+
+A testing framework should be un-difficult to use. Again, this is another _relative_ definition. If it's too confusing to a developer to use, it will be less likely that tests will get written.
+
+### Community Vetting
+
+A testing framework should have community support. An unpopular framework may not have the kinks ironed out. It might have incomplete documentation (including stack overflow questions.) It might not have enough developers working on it to fix its issues.
+
+### Works with your framework of choice (React, Redux, Electron, etc)
+
+A testing framework must be compatible with what you're trying to test. It should be flexible enough to be able to adapt to the changing needs of those frameworks.
+
+### Nice to Have
+
+Depending on what you need to test, a framework should support:
+
 - Webpack compilation (injecting of webpack-defined global variables)
   - simulating a CICD build step
 - Babel transpilation of ESNext code
   - Use of alias module import statements (removing the need for `../../`)
-- React, Redux, Electron
 - Mocking / Injecting modules (intercepting require statements), proxyquire/inject-loader
-- Adding tools like coverage, snapshot testing, etc. Istanbul/nyc (Tailor)
+- Adding tools like coverage (`nyc`), snapshot testing, etc.
 - Runs in CI/CD
-
-Nice to have:
-
-- speed
-- ease of use
-- nice syntax
-- community / packages are maintained
 
 ## The Frameworks
 
