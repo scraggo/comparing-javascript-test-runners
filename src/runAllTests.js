@@ -14,10 +14,16 @@ const testRunners = ['ava', 'jest', 'mocha', 'parallel'];
  */
 const makeNPMScript = (argsArray, options = {}) => () => {
   const { log } = options;
-  const { stdout } = execa.sync('npm', argsArray);
+  let execaOptions = {};
   if (log === true) {
-    console.log(stdout);
+    execaOptions = {
+      all: true,
+      // these are necessary in order to keep console colors and formatting
+      stdio: 'inherit',
+      sterr: 'inherit',
+    };
   }
+  execa.sync('npm', argsArray, execaOptions);
 };
 
 /**
@@ -73,7 +79,7 @@ const testData = testRunners.reduce((acc, name) => {
     name,
     run: () =>
       runScript({
-        script: makeNPMScript(command),
+        script: makeNPMScript(command, { log: true }),
       }),
   };
   return acc;
