@@ -66,7 +66,6 @@ The general principles I think are important are:
 
 - Learn more about testing by reading the test specs of a well-written library.
 - Is an external library under-documented? Read through the test-suites to get a quick view into how it works. (Reading the open and closed issues may be helpful too.)
-- Node.js & JavaScript Testing Best Practices (2020) - Medium: <https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347>
 
 ## Requirements
 
@@ -80,9 +79,11 @@ A testing framework should have community support. An unpopular framework may no
 
 A testing framework should not be slow. We can only define this _relatively_ - for one person's _slow_ may be another person's _acceptable_. We will be benchmarking speed for all the frameworks.
 
-### Ease of Use and Failure Reporting
+### Ease of Use
 
 A testing framework should be un-difficult to use. The setup, configuration, command-line options, and test writing itself should be _relatively_ straightforward. If it's too confusing to a developer to use, it will be less likely that tests will get written.
+
+### Failure Reporting
 
 A testing framework should give ample information when a particular test fails. We should know exactly which test failed and the stack trace of the unit being called.
 
@@ -97,6 +98,7 @@ A testing framework must be compatible with what you're trying to test. It shoul
 Depending on what you need to test, a framework should support:
 
 - Organization strategies: `describe` blocks, `it` blocks
+- "watch" and "inspect" modes
 - A variety of assertion capabilities
 - Ability to add tools like coverage (`nyc`), snapshot testing, etc.
 - Mocking / Injecting modules (intercepting require statements), proxyquire/inject-loader
@@ -218,20 +220,89 @@ In the readme of this repo is an explanation of how I wrote and ran the tests. T
 
 A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll mostly be analyzing the speeds relative to each other.
 
-`mocha-parallel-tests` is the clear winner. AVA is close behind and actually ran faster than `mocha-parallel-tests` in a few of the runs. Jest is also fast, but seems to have a bit more overhead than the other two.
+`mocha-parallel-tests` is the clear winner in this run. AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) Jest is also fast, but seems to have a bit more overhead than the other two.
 
 Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is the most important benchmark (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
 
-### Ease of Use and Failure Reporting
+### Ease of Use
 
-blah
+I'll split "ease of use" into a few categories:
+
+- Amount of necessary configuration/dependencies
+- Writing the tests
+- Running the tests
+
+### Amount of necessary configuration/dependencies
+
+|                      | Configuration                             | Dependencies                      |
+| -------------------- | ----------------------------------------- | --------------------------------- |
+| Jest                 | Everything is included                    | built-in                          |
+| AVA                  | Sensible defaults                         | externals necessary in most cases |
+| Mocha                | Many, many options                        | externals always necessary        |
+| mocha-parallel-tests | (Most of mocha CLI options are supported) | Mocha                             |
+
+Jest
+
+> Jest's configuration can be defined in the package.json file of your project, or through a jest.config.js file or through the --config <path/to/file.js|cjs|mjs|json> option. If you'd like to use your package.json to store Jest's config, the "jest" key should be used on the top level so Jest will know how to find your settings
+
+- Sensible defaults for finding tests `(default: [ "**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ])`
+- A huge number of options
+- Built-in snapshot tests, coverage reporting, mocking modules and libraries
+- Excellent documentation, lots of tutorials and examples
+
+AVA
+
+- Sensible defaults for finding tests (see Jest's defaults)
+- Configure in package.json, an ava.config.\* file, or another override file in the directory root
+- Many CLI options
+- Built-in snapshot tests
+- `@ava/babel` for Babel compilation
+- `@ava/typescript`for TypeScript support
+- external libraries for coverage reporting, mocking modules and libraries
+- Good documentation, few tutorials and examples
+
+Mocha
+
+> By default, mocha looks for the glob `"./test/*.js"`, so you may want to put your tests in `test/` folder. If you want to include subdirectories, pass the `--recursive` option.
+
+- One default for finding tests (above)
+- Configure in package.json or an override file
+- Many, many CLI options
+- external libraries for assertions, coverage reporting, snapshot tests, mocking modules and libraries (everything)
+- Good documentation (slightly opaque and a lot to read through), lots of tutorials and examples (in and out of Mocha's docs)
+
+mocha-parallel-tests
+
+> Most of mocha CLI options are supported. If you're missing some of the options support you're welcome to submit a PR: all options are applied in a same simple way.
+
+- Run tests as you would with Mocha. See above
+
+#### Writing the tests
+
+asdf
+
+#### Running the tests
+
+asdf
+
+### Failure Reporting
+
+asdf
+
+### Works with your framework and environment of choice (React, Redux, Electron, etc)
+
+asdf
+
+### Nice to Have
+
+asdf
 
 ### Examples
 
 - ava - is
 - https://mochajs.org/#examples
 
-### Etc
+### External Resources
 
 https://www.slant.co/versus/12696/12697/~mocha_vs_jest
 https://stackshare.io/stackups/ava-vs-mocha
@@ -241,3 +312,5 @@ http://zpalexander.com/migrating-from-mocha-to-ava/
 a cool example: https://github.com/tastejs/todomvc
 
 Jest - https://github.com/Raathigesh/majestic/
+
+- Node.js & JavaScript Testing Best Practices (2020) - Medium: <https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347>
