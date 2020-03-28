@@ -12,20 +12,9 @@ Outline
 
 ## Overview
 
-The Problem
+### The Problem
 
-Technology is always changing. As a result, the frameworks in use this year may be superseded by other frameworks in the future. Despite this, we can assume that code should be tested and there are general principles we can adhere to.
-
-Goals
-
-This project is an exploration of test writing in general and how three popular testing frameworks may guide our testing practices.
-
-The general principles we'll look into are:
-
-- State: the pros and cons of sharing state between tests
-- Documentation: writing tests that outline the functionality of the application
-- Coverage: the extent to which one should measure test coverage
-- Philosophy: "What" should we test? What level of "granularity" are we aiming for (unit vs integration vs acceptance tests)?
+Technology is always changing. As a result, the popular frameworks of today may become unpopular tomorrow. Despite this, we can assume that code should be tested and there are general principles we can adhere to.
 
 In recent years, JavaScript has become a viable language to learn given the drastic enhancements afforded by ES6 and later language specifications. As a result, many front-end frameworks have become massively popular. These frameworks are much easier to test than frameworks of years past. Three frameworks have risen far above the rest as the most popular choices:
 
@@ -34,72 +23,215 @@ In recent years, JavaScript has become a viable language to learn given the dras
 - Mocha <https://mochajs.org/>
   - and an interesting plugin called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
 
-Taking some requirements (that we will come up with) we can compare these frameworks on a number of points.
+All this begs some questions: Which testing framework is right for me and my team? What are criteria do I base my decision on? That's what this article aims to address.
+
+### Goals
+
+The immediate practical goal of this article is to help you choose a JavaScript testing framework.
+
+In order to do this, we'll explore some general principles about testing frameworks and testing in general. Once we've established this, we can come up with our criteria for evaluation. Then, we can explore frameworks in general and the details.
 
 ## Testing in general
 
 There are differing opinions on what the "best practices" are for testing code. My opinion takes a pragmatic tone - we should test what is necessary to gain confidence that our application is running correctly and we should do it in a way that leverages existing tools that have been refined and have become trusted by the community.
 
-- clear separation of unit, integration, e2e tests
-  - what do you consider the "unit"?
-  - don't test lib code
-  - it's perfectly possible that your units work separately but not together
-- no shared state between tests
-- good coverage, giving confidence to refactor
-- black box testing, not testing implementation (testing behavior)
-- simple to understand, another form of documentation for the source code
+The general principles I think are important are:
 
-  - can product owner read through tests? or are they abstract?
+### Documentation: writing tests that outline the functionality of the application
 
-Code review: do tests meet the Acceptance Criteria?
+- A test description should be simple to understand. Written in this way, the tests are another form of documentation for the source code. A product owner should be able to read through the tests and understand their relation to the application as a whole.
+- In the case of testing abstractions, we should take time to be even clearer about the utility of such a test.
 
-Tip: read the test specs of a library, read open issues
+### Philosophy: "What" should we test? What level of "granularity" are we aiming for?
 
-- https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347
+- A unit test has the smallest scope of the test types. What may be under test is a function or a class.
+- An integration test has a mid-level scope. It's goal is to combine individual units test them as a group with the aim of assuring that they run correctly when interacting with each other. What we want to avoid is the scenario where your units work perfectly in isolation, but not together.
+- An acceptance test (a.k.a. end to end test) has the highest scope. It's goal is to test as an end user would use the application without directly calling source code.
+- When in doubt:
+  - It should be clear where unit, integration, and acceptance tests are.
+  - Think of the unit under test as a "black box" whenever possible. The goal should be to test the _behavior_ of the unit, not how it's implemented.
+  - Don't test external library code. We should be using high-quality libraries that have their own test suites.
+
+### State: the pros and cons of sharing state between tests
+
+- Ideally, one doesn't share state between tests, period. Test suites (a file that contains test blocks) should definitely aim to steer clear of shared state. Individual test blocks should have a clean version of the unit under test.
+- In a few cases, shared setup between test blocks may be necessary. An example of this is when we're making assertions during an end-to-end test that has many steps.
+
+### Coverage: the extent to which one should measure test coverage
+
+- Using test coverage tools gives us a metric for how many lines, statements, or blocks of your code are tested. Your team may decide that 100% test coverage is necessary. My feeling is that you should cover all _essential_ functions, the goal being that after changing code, your tests will fail if your changes affected anything that it could have affected.
+- Another "metric" that I like to use while reviewing code is analyzing the changes for the big picture: Do the tests cover what was in the "acceptance criteria" of the task?
+
+### Tips
+
+- Learn more about testing by reading the test specs of a well-written library.
+- Is an external library under-documented? Read through the test-suites to get a quick view into how it works. (Reading the open and closed issues may be helpful too.)
+- Node.js & JavaScript Testing Best Practices (2020) - Medium: <https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347>
 
 ## Requirements
+
+Now that we've outlined some testing concepts, we can dive into what we'll require from a test framework.
+
+### Popularity and Community
+
+A testing framework should have community support. An unpopular framework may not have the kinks ironed out. It might have incomplete documentation (including stack overflow questions.) It might not have enough developers working on it to fix its issues.
 
 ### Speed
 
 A testing framework should not be slow. We can only define this _relatively_ - for one person's _slow_ may be another person's _acceptable_. We will be benchmarking speed for all the frameworks.
 
-### Ease of Use
+### Ease of Use and Failure Reporting
 
-A testing framework should be un-difficult to use. Again, this is another _relative_ definition. If it's too confusing to a developer to use, it will be less likely that tests will get written.
+A testing framework should be un-difficult to use. The setup, configuration, command-line options, and test writing itself should be _relatively_ straightforward. If it's too confusing to a developer to use, it will be less likely that tests will get written.
 
-### Community Vetting
+A testing framework should give ample information when a particular test fails. We should know exactly which test failed and the stack trace of the unit being called.
 
-A testing framework should have community support. An unpopular framework may not have the kinks ironed out. It might have incomplete documentation (including stack overflow questions.) It might not have enough developers working on it to fix its issues.
-
-### Works with your framework of choice (React, Redux, Electron, etc)
+### Works with your framework and environment of choice (React, Redux, Electron, etc)
 
 A testing framework must be compatible with what you're trying to test. It should be flexible enough to be able to adapt to the changing needs of those frameworks.
+
+- Ability to run in multiple environments: `node`, in-browser, CI/CD
 
 ### Nice to Have
 
 Depending on what you need to test, a framework should support:
 
+- Organization strategies: `describe` blocks, `it` blocks
+- A variety of assertion capabilities
+- Ability to add tools like coverage (`nyc`), snapshot testing, etc.
+- Mocking / Injecting modules (intercepting require statements), proxyquire/inject-loader
 - Webpack compilation (injecting of webpack-defined global variables)
   - simulating a CICD build step
 - Babel transpilation of ESNext code
   - Use of alias module import statements (removing the need for `../../`)
-- Mocking / Injecting modules (intercepting require statements), proxyquire/inject-loader
-- Adding tools like coverage (`nyc`), snapshot testing, etc.
-- Runs in CI/CD
 
-## The Frameworks
+## Comparing the Frameworks
 
-- Mocha https://mochajs.org/
-- Jest https://jestjs.io/
-- Ava https://github.com/avajs/ava
+To get a sense of what we're comparing, here's a summary of each framework:
 
-mocha Weekly Downloads 3.5m | Last publish 10 days ago
-jest Weekly Downloads 5.5m | Last publish 16 hours ago
-mocha-webpack Weekly Downloads 47,311 | Last publish 2 years ago
-mochapack Weekly Downloads 23,467 | Last publish 2 months ago
-mocha-parallel-tests Weekly Downloads 18,097 | Last publish 5 months ago
+### AVA
 
-### Comparison
+<https://github.com/avajs/ava>
+
+The magic of AVA is in its simplicity. It's minimal, fast, concurrent, and has a simple syntax that entirely removes the use of globals (like `describe`, `it`, etc.) It supports asynchronous behavior out of the box. AVA has a small team of three developers, one being open-source heavyweight `@sindresorhus`. Some other selling points:
+
+> AVA is a test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.
+
+> AVA adds code excerpts and clean diffs for actual and expected values. If values in the assertion are objects or arrays, only a diff is displayed, to remove the noise and focus on the problem.
+
+> AVA automatically removes unrelated lines in stack traces, allowing you to find the source of an error much faster, as seen above.
+
+> AVA automatically detects whether your CI environment supports parallel builds. Each build will run a subset of all test files, while still making sure all tests get executed. See the ci-parallel-vars package for a list of supported CI environments.
+
+### Jest
+
+<https://jestjs.io/>
+
+Jest is feature-packed, aiming to solve _everything_ in one package, with a focus on making the experience delightful for the test author. It's written and maintained by Facebook and is extremely popular and community supported due to the ubiquity of `React` and `create-react-app`. The CLI is colorful and interactive with detailed exception reporting and diffing. Snapshot testing, mocking, and coverage reporting are all built-in. Also included are globals like `it` and `describe` as well as a custom assertion library (similar to `chai`). It also touts:
+
+> zero config - Jest aims to work out of the box, config free, on most JavaScript projects.
+
+> isolated - Tests are parallelized by running them in their own processes to maximize performance.
+
+> great api - From `it` to `expect` - Jest has the entire toolkit in one place. Well documented, well maintained, well good.
+
+### Mocha
+
+<https://mochajs.org/>
+
+Being the most established of the testing frameworks, Mocha enjoys a firm place in the JavaScript community. It's been around since 2011 and is maintained by the OpenJS Foundation and contributors. Mocha has numerous command-line options and configurations it supports. It's generally used in tandem with external libraries - `assert` or `chai` can take care of your assertion needs and `sinon` could take care of your mocking needs. The `it` and `describe` blocks mentioned by Jest were pioneered by Mocha (along with the `beforeEach`, `afterEach`, and other pre/post hooks). In addition to being able to run in `node`, you can also run tests in the browser giving you full access to the DOM. There's also a dizzying array of test reporting styles (one being Nyan cat.)
+
+> Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser, making asynchronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.
+
+> Mocha is the most-depended-upon module on npm (source: libraries.io)
+
+> The SuperAgent request library test documentation was generated with Mocha's doc reporter
+
+### mocha-parallel-tests
+
+<https://github.com/mocha-parallel/mocha-parallel-tests>
+
+`mocha-parallel-tests` is not a testing framework. It's a wrapper over Mocha designed to significantly speed it up. It's new in 2019 and has a small team. I'll go into detail on why I'm including it here (and what "parallel" means) in the "speed" portion of this article. From the readme:
+
+> `mocha-parallel-tests` is a test runner for tests written with mocha testing framework which allows you to run them in parallel.
+
+> `mocha-parallel-tests` executes each of your test files in a separate process while maintaining the output structure of mocha.
+
+> Compared to the other tools which try to parallelize mocha tests execution, `mocha-parallel-tests` doesn't require you to write the code in a different way or use some specific APIs - just run your tests with mocha-parallel-tests instead of mocha and you will see the difference. Or if you prefer to use mocha programmatic API replace it with `mocha-parallel-tests` default export and you're done!
+
+> If you're using Node.JS >= 12 your tests execution will be even faster because `mocha-parallel-tests` supports running tests with Node.JS worker threads API.
+
+### Popularity and Community Comparison
+
+Now that we know a bit about each framework, lets look at the popularity and publish frequency of each one.
+
+|                      | Weekly Downloads | Last Publish |
+| -------------------- | ---------------- | ------------ |
+| Jest                 | 7.2 million      | 2020-03-26   |
+| Mocha                | 4.3 million      | 2020-03-18   |
+| AVA                  | 227,179          | 2020-03-22   |
+| mocha-parallel-tests | 18,097           | 2020-02-08   |
+
+Jest is clearly the most popular framework with 7.2 million weekly downloads. It was published most recently and is updated very frequently. Its popularity is due to the popularity of the `React` library. Jest is shipped with `create-react-app` and is recommended for use in `React`'s documentation.
+
+Mocha is close behind with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is used in countless applications.
+
+AVA has 227,179 weekly downloads, an order of magnitude fewer than the most popular frameworks. This may be due to its niche focus on minimalism or it having a small team.
+
+`mocha-parallel-tests` has 18,097 weekly downloads and doesn't enjoy as frequent updates as the major three. It's extremely new and not a framework.
+
+In general, more popularity brings more community involvement. The number of open and closed issues tends to increase as a result. To create a loose maintenance ratio metric, we divide the open issues by the closed issues:
+
+|                      | Open Issues | Closed Issues | Ratio |
+| -------------------- | ----------- | ------------- | ----- |
+| Mocha                | 254         | 2225          | 11%   |
+| AVA                  | 154         | 1169          | 13%   |
+| Jest                 | 844         | 4343          | 19%   |
+| mocha-parallel-tests | 37          | 111           | 33%   |
+
+Mocha has the lowest ratio of open to closed issues, making it the most successfully maintained library. It's stability surely correlates with its longevity (and vice versa.)
+
+\* Caveat: I'm assuming the open issues in these libraries aren't crippling to the core functionality of the library.
+
+### Speed Comparison
+
+Before we get to the comparison, we need to discuss a few concepts. All of the frameworks run the tests in "parallel", with the exception of Mocha.
+
+#### What do "serial" and "parallel" mean?
+
+"Serial" - one at a time, ie - the first must complete before the second, the second must complete before the third, etc.
+
+"Parallel" - happening simultaneously, ie - the first, second, third, etc can happen at the same time.
+
+For all of the frameworks with parallel capabilities, only separate test files are run in parallel. `describe` and `it` blocks in a given file/suite are run serially. Given this, writing more test files and putting slow tests can be put into their own files may increase the speed of running the complete test suite.
+
+#### Benchmarks
+
+In the readme of this repo is an explanation of how I wrote and ran the tests. The aim was to simulate a "true" test run in a significantly sized enterprise codebase.
+
+|                      | Speed   | Type     |
+| -------------------- | ------- | -------- |
+| mocha-parallel-tests | 7.314s  | parallel |
+| AVA                  | 9.673s  | parallel |
+| Jest                 | 12.533s | parallel |
+| Mocha                | 16.274s | serial   |
+
+A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll mostly be analyzing the speeds relative to each other.
+
+`mocha-parallel-tests` is the clear winner. AVA is close behind and actually ran faster than `mocha-parallel-tests` in a few of the runs. Jest is also fast, but seems to have a bit more overhead than the other two.
+
+Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is the most important benchmark (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
+
+### Ease of Use and Failure Reporting
+
+blah
+
+### Examples
+
+- ava - is
+- https://mochajs.org/#examples
+
+### Etc
 
 https://www.slant.co/versus/12696/12697/~mocha_vs_jest
 https://stackshare.io/stackups/ava-vs-mocha
@@ -108,79 +240,4 @@ http://zpalexander.com/migrating-from-mocha-to-ava/
 
 a cool example: https://github.com/tastejs/todomvc
 
-#### Mocha
-
-Can we go back to mocha without mocha-pack?
-
-Pros:
-
-- extensible
-- https://github.com/mocha-parallel/mocha-parallel-tests
-
-Cons:
-
-- slower
-
-#### Jest
-
-Pros:
-
-- developer experience
-- fast
-- integrated
-- https://github.com/Raathigesh/majestic/
-
-Cons:
-
-- injected globals
-
-#### Ava
-
-Pros:
-
-- extensible
-- fast
-- async
-
-Cons:
-
-- minimal
-
-## mocha-parallel-tests
-
-[mocha-parallel-tests](https://github.com/mocha-parallel/mocha-parallel-tests)
-executes each of your test files in a separate process while maintaining the output structure of mocha.
-
-If you're using Node.JS >= 12 your tests execution will be even faster because `mocha-parallel-tests` supports running tests with Node.JS worker threads API.
-
-## What do "serial" and "parallel" mean?
-
-"Serial" - one at a time, ie - the first must complete before the second, the second must complete before the third, etc.
-
-"Parallel" - happening simultaneously, ie - the first, second, third, etc can happen at the same time.
-
-## Comparing with mocha
-
-Run `npm run clean && npm run make-tests` to generate latest test suites.
-
-Run `npm run test-mocha` to run with `mocha`. Notice that the tests are run in serial.
-
-> 1250 passing (15s)
-
-Run `npm run test-parallel` to run with `mocha-parallel-tests`. Notice that the tests are run in parallel.
-
-> 1250 passing (5s)
-
-Tests on my machine are running 300% faster. _Theoretically_, they could be 1000+% faster if they were all truly in parallel. In reality, the more tests you have and the longer individual test suites take, the gains will be diminished.
-
-## Only separate test files are run in parallel
-
-Only separate test files are run in parallel. `describe` and `it` blocks in a given suite are run serially.
-
-> Given this fact, any slow tests can be put into their own files to increase the speed of running all the unit tests.
-
-## For consideration and drawbacks
-
-- is a wrapper over `mocha`, not a plugin. May not be compatible with `mochapack` etc
-- 34 open issues
-- New in 2019, 9,217 weekly downloads
+Jest - https://github.com/Raathigesh/majestic/
