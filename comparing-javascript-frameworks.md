@@ -1,6 +1,8 @@
 # Comparing JavaScript Testing Frameworks
 
-This article is the explanatory companion to <https://github.com/scraggo/compare-javascript-testing-frameworks> - a node application that has the capability of running multiple tests in the testing frameworks I'll be comparing here.
+This article is a comparison of the AVA, Jest, Mocha (along with the Mocha wrapper `mocha-parallel-tests`) JavaScript testing frameworks.
+
+The article has a companion repo: <https://github.com/scraggo/compare-javascript-testing-frameworks> - a node application that has the capability of creating and running tests in the frameworks listed above.
 
 Outline
 
@@ -16,20 +18,18 @@ Outline
 
 Technology is always changing. As a result, the popular frameworks of today may become unpopular tomorrow. Despite this, we can assume that code should be tested and there are general principles we can adhere to.
 
-In recent years, JavaScript has become a viable language to learn given the drastic enhancements afforded by ES6 and later language specifications. As a result, many front-end frameworks have become massively popular. These frameworks are much easier to test than frameworks of years past. Three frameworks have risen far above the rest as the most popular choices:
+In recent years, JavaScript has become a more robust language thanks to the steady cadence of enhancements starting with ES6/2015. As a result, many front-end frameworks can accomplish the task of creating serious web applications. In general, these frameworks are much easier to test than frameworks of years past. Three testing frameworks have risen far above the rest as the most popular choices:
 
-- Ava <https://github.com/avajs/ava>
+- AVA <https://github.com/avajs/ava>
 - Jest <https://jestjs.io/>
 - Mocha <https://mochajs.org/>
   - and an interesting plugin called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
 
-**How does one choose the right testing framework for their use case? What are criteria does one base their decision on?**
-
-This article aims to address these questions.
-
 ### Goals
 
-The immediate practical goal of this article is to help you choose a JavaScript testing framework.
+The immediate practical goal of this article is to help you choose a JavaScript testing framework. My aim is to address the following questions:
+
+**How does one choose the right testing framework for their use case? What criteria should one base their decision on?**
 
 In order to do this, we'll explore some general principles about testing frameworks and testing in general. Once we've established this, we can come up with our criteria for evaluation. Then, we can explore frameworks in general and the details.
 
@@ -179,13 +179,13 @@ Now that we know a bit about each framework, lets look at the popularity and pub
 
 Jest is clearly the most popular framework with 7.2 million weekly downloads. It was published most recently and is updated very frequently. Its popularity can be partially attributed to the popularity of the `React` library. Jest is shipped with `create-react-app` and is recommended for use in `React`'s documentation.
 
-Mocha is close behind with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is used in countless applications.
+Mocha isn't too far behind with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is used in countless applications.
 
 AVA has 227,179 weekly downloads, an order of magnitude fewer than the most popular frameworks. This may be due to its niche focus on minimalism or it having a small team.
 
 `mocha-parallel-tests` has 18,097 weekly downloads and doesn't enjoy as frequent updates as the major three. It's extremely new and not a framework.
 
-In general, more popularity brings more community involvement. The number of open and closed issues tends to increase as a result. To create a loose maintenance ratio metric \*, we divide the open issues by the total number of issues (open + closed issues):
+In general, more popularity brings more community involvement. The number of open and closed issues tends to increase as a result. To create a loose maintenance ratio \*metric , we divide the open issues by the total number of issues (open + closed issues):
 
 |                      | Open Issues | Closed Issues | Ratio            |
 | -------------------- | ----------- | ------------- | ---------------- |
@@ -210,9 +210,9 @@ Before we get to the comparison, we need to discuss a few concepts. All of the f
 
 #### What do "serial" and "parallel" mean?
 
-"Serial" - one at a time, ie - the first must complete before the second, the second must complete before the third, etc.
+"Serial" - one at a time, ie - the first must complete before the second, the second must complete before the third, etc. Code _may_ run asynchronously but doesn't start a separate process. This type of processing is also known as sequential processing.
 
-"Parallel" - happening simultaneously, ie - the first, second, third, etc can happen at the same time.
+"Parallel" - happening simultaneously, ie - the first, second, third, etc can happen at the same time. Multiple tasks are completed at a time by different processes (which may different threads or literally different processors).
 
 For all of the frameworks with parallel capabilities, only separate test files are run in parallel. `describe` and `it` blocks in a given file/suite are run serially. Given this, writing more test files and putting slow tests can be put into their own files may increase the speed of running the complete test suite.
 
@@ -220,18 +220,18 @@ For all of the frameworks with parallel capabilities, only separate test files a
 
 In the readme of this repo is an explanation of how I wrote and ran the tests. The aim was to simulate a "true" test run in a significantly sized enterprise codebase.
 
-|                      | Speed   | Type     |
-| -------------------- | ------- | -------- |
-| mocha-parallel-tests | 7.314s  | parallel |
-| AVA                  | 9.673s  | parallel |
-| Jest                 | 12.533s | parallel |
-| Mocha                | 16.274s | serial   |
+|                      | Speed | Type     |
+| -------------------- | ----- | -------- |
+| mocha-parallel-tests | 7.3s  | parallel |
+| AVA                  | 9.6s  | parallel |
+| Jest                 | 12.5s | parallel |
+| Mocha                | 16.2s | serial   |
 
 A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll mostly be analyzing the speeds relative to each other.
 
 `mocha-parallel-tests` is the clear winner in this run. AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) Jest is also fast, but seems to have a bit more overhead than the other two.
 
-Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is the most important benchmark (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
+Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is your most important criteria (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
 
 ### Ease of Use
 
@@ -252,7 +252,7 @@ I'll split "ease of use" into a few categories:
 
 Jest - 1st place
 
-Jest takes the cake with what you need to configure. Using its defaults wherever possible, you could have close to zero configuration.
+Jest takes the cake in this department. Using its defaults wherever possible, you could have close to zero configuration.
 
 > Jest's configuration can be defined in the package.json file of your project, or through a jest.config.js file or through the --config <path/to/file.js|cjs|mjs|json> option. If you'd like to use your package.json to store Jest's config, the "jest" key should be used on the top level so Jest will know how to find your settings
 
@@ -269,8 +269,8 @@ AVA - 2nd place
 - Built-in snapshot tests
 - `@ava/babel` for Babel compilation
 - `@ava/typescript`for TypeScript support
-- external libraries for coverage reporting, mocking modules and libraries
 - Good documentation, few tutorials and examples
+- Coverage reporting, mocking modules and libraries must be imported from elsewhere
 
 Mocha - 3rd place
 
@@ -279,8 +279,8 @@ Mocha - 3rd place
 - One default for finding tests (above)
 - Configure in package.json or an override file
 - Many, many CLI options
-- external libraries for assertions, coverage reporting, snapshot tests, mocking modules and libraries (everything)
 - Good documentation (slightly opaque and a lot to read through), lots of tutorials and examples (in and out of Mocha's docs)
+- Assertions, coverage reporting, snapshot tests, mocking modules and libraries (everything) must be imported from elsewhere
 
 mocha-parallel-tests - 4th place
 
@@ -290,7 +290,71 @@ mocha-parallel-tests - 4th place
 
 #### Writing the tests
 
-asdf
+|                              | Summary                             |
+| ---------------------------- | ----------------------------------- |
+| Mocha & mocha-parallel-tests | `describe` and `it` blocks          |
+| Jest                         | like Mocha, but everything built in |
+| AVA                          | import test context, customizable   |
+
+Mocha's influence on test-writing is undeniable. From [Mocha's getting started section](https://mochajs.org/#getting-started), we can see how tests are organized in nested `describe` blocks that can contain any number of `it` blocks which make test assertions.
+
+```js
+const assert = require('assert');
+describe('Array', function() {
+  describe('#indexOf()', function() {
+    it('should return -1 when the value is not present', function() {
+      assert.equal([1, 2, 3].indexOf(4), -1);
+    });
+  });
+});
+```
+
+[Chai's `expect`](https://www.chaijs.com/) is commonly used instead of assert:
+
+```js
+const { expect } = require('chai');
+
+it('should return -1 when the value is not present', function() {
+  expect([1, 2, 3].indexOf(4)).to.equal(-1);
+});
+```
+
+> More Mocha test examples can be found here: <https://mochajs.org/#examples>
+
+Jest follows Mocha's example, but everything is included (no need to use external assertion, etc libraries). A lot of the syntax is compatible with Mocha, for example - `it` can be used instead of `test`:
+
+```js
+describe('Array', function() {
+  describe('#indexOf()', function() {
+    test('should return -1 when the value is not present', function() {
+      expect([1, 2, 3].indexOf(4)).toEqual(-1);
+    });
+  });
+});
+```
+
+(Notice that Jest's `toEqual` is very much like chai's `to.equal`. Many of Jest's assertions are camel-cased analogues of chai's assertions.)
+
+AVA takes a different approach to writing tests. It prides itself on not injecting globals into your tests. Everything comes from `test` and the `t` "execution context" variable in the callback:
+
+```js
+// Array-indexOf.spec.js
+const test = require('ava');
+
+test('should return -1 when the value is not present', t => {
+  t.is([1, 2, 3].indexOf(4), -1);
+});
+```
+
+Built-in assertions are available on the `t` object: `true`, `false`, `truthy`, `falsy`, `is`, etc. You can also create custom assertions.
+
+Like Mocha and Jest, AVA has `before`, `beforeEach`, `after`, and `afterEach` hooks documented [here](https://github.com/avajs/ava/blob/master/docs/01-writing-tests.md#before--after-hooks). These work on a per-file basis.
+
+AVA does not have a way to nest test blocks (an ability `describe` affords in Mocha and Jest.) [This issue](https://github.com/avajs/ava/issues/222) goes into detail on why the maintainers haven't adopted this functionality. [This article](https://stackoverflow.com/questions/41269085/why-doesnt-js-testing-library-ava-have-suites-or-any-other-groupings) has some alternatives.
+
+An excellent [example of a single AVA test suite](https://github.com/sindresorhus/is/blob/master/test/test.ts) shows a wide range of AVA's capabilities.
+
+Since the frameworks have drastically different styles and similar capabilities, this was difficult to rank from easiest to most difficult. AVA has a noticeable lack of organizing tests with nested `describe` blocks, but its contained API is extremely flexible. Mocha forces the user to make decisions on which libraries to use, but this makes it almost limitless in capability. Jest includes _everything_, but some of the built-in magic makes it difficult or confusing to get certain things done ( see [this issue on mocks](https://github.com/facebook/jest/issues/2567) ).
 
 #### Running the tests
 
