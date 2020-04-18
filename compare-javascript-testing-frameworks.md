@@ -1,8 +1,11 @@
 # Comparing JavaScript Testing Frameworks
 
-This article is a comparison of the AVA, Jest, Mocha (along with the Mocha wrapper `mocha-parallel-tests`) JavaScript testing frameworks.
+![compare-javascript-testing-frameworks.png](compare-javascript-testing-frameworks.png)
 
-The article has a companion repo: <https://github.com/scraggo/compare-javascript-testing-frameworks> - a node application that has the capability of creating and running tests in the frameworks listed above.
+[This article](https://github.com/scraggo/compare-javascript-testing-frameworks/blob/master/compare-javascript-testing-frameworks.md) is a comparison of the AVA, Jest, Mocha (along with the Mocha wrapper `mocha-parallel-tests`) JavaScript testing frameworks.
+
+The article is a companion to [a node application that has the capability of creating and running tests in the frameworks listed above](https://github.com/scraggo/compare-javascript-testing-frameworks) (both part of the <https://github.com/scraggo/compare-javascript-testing-frameworks>
+repo.)
 
 - [Comparing JavaScript Testing Frameworks](#comparing-javascript-testing-frameworks)
   - [Overview](#overview)
