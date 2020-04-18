@@ -1,6 +1,6 @@
 # Comparing JavaScript Testing Frameworks
 
-<https://github.com/scraggo/compare-javascript-testing-frameworks>
+![compare-javascript-testing-frameworks.png](compare-javascript-testing-frameworks.png)
 
 JavaScript testing frameworks for comparison:
 
@@ -10,8 +10,8 @@ JavaScript testing frameworks for comparison:
 
 This repo contains two things:
 
-1. A node application that has the capability of running multiple tests in all of these frameworks.
-2. [A companion article](comparing-javascript-frameworks.md) - an in-depth comparison of these frameworks. This article gives context about the motivation for making this application.
+1. A node application that has the capability of running multiple tests in all of these frameworks. [Permalink](https://github.com/scraggo/compare-javascript-testing-frameworks/blob/master/README.md)
+2. [A companion article](./compare-javascript-testing-frameworks.md) - an in-depth comparison of these frameworks. This article gives context about the motivation for making this application. [Permalink](https://github.com/scraggo/compare-javascript-testing-frameworks/blob/master/compare-javascript-testing-frameworks.md)
 
 ## About the application
 
