@@ -4,13 +4,41 @@ This article is a comparison of the AVA, Jest, Mocha (along with the Mocha wrapp
 
 The article has a companion repo: <https://github.com/scraggo/compare-javascript-testing-frameworks> - a node application that has the capability of creating and running tests in the frameworks listed above.
 
-**Outline**
-
-- Overview
-- Testing in general
-- Requirements and nice-to-haves
-- Frameworks in general
-- Frameworks details
+- [Comparing JavaScript Testing Frameworks](#comparing-javascript-testing-frameworks)
+  - [Overview](#overview)
+    - [The Problem](#the-problem)
+    - [Goals](#goals)
+  - [Testing in general](#testing-in-general)
+    - [Documentation: writing tests that outline the functionality of the application](#documentation-writing-tests-that-outline-the-functionality-of-the-application)
+    - [Philosophy: "What" should we test? What level of "granularity" are we aiming for?](#philosophy-%22what%22-should-we-test-what-level-of-%22granularity%22-are-we-aiming-for)
+    - [State: the pros and cons of sharing state between tests](#state-the-pros-and-cons-of-sharing-state-between-tests)
+    - [Coverage: the extent to which one should measure test coverage](#coverage-the-extent-to-which-one-should-measure-test-coverage)
+    - [Tips](#tips)
+  - [Requirements](#requirements)
+    - [Popularity and Community](#popularity-and-community)
+    - [Speed](#speed)
+    - [Ease of Use](#ease-of-use)
+    - [Failure Reporting and Debugging](#failure-reporting-and-debugging)
+    - [Works with your framework and environment of choice (React, Redux, Electron, etc)](#works-with-your-framework-and-environment-of-choice-react-redux-electron-etc)
+    - [Nice to Have](#nice-to-have)
+  - [Comparing the Frameworks](#comparing-the-frameworks)
+    - [AVA](#ava)
+    - [Jest](#jest)
+    - [Mocha](#mocha)
+    - [mocha-parallel-tests](#mocha-parallel-tests)
+    - [Popularity and Community Comparison](#popularity-and-community-comparison)
+    - [Speed Comparison](#speed-comparison)
+      - [What do "serial" and "parallel" mean?](#what-do-%22serial%22-and-%22parallel%22-mean)
+      - [Benchmarks](#benchmarks)
+    - [Ease of Use Comparison](#ease-of-use-comparison)
+    - [Amount of necessary configuration/dependencies](#amount-of-necessary-configurationdependencies)
+      - [Writing the tests](#writing-the-tests)
+      - [Running the tests](#running-the-tests)
+    - [Failure Reporting and Debugging Comparison](#failure-reporting-and-debugging-comparison)
+    - [Works with your framework and environment of choice (React, Redux, Electron, etc) Comparison](#works-with-your-framework-and-environment-of-choice-react-redux-electron-etc-comparison)
+    - [Full Comparison (with "Nice to Haves")](#full-comparison-with-%22nice-to-haves%22)
+  - [Conclusion](#conclusion)
+    - [External Resources](#external-resources)
 
 ## Overview
 
@@ -233,7 +261,7 @@ A caveat with all benchmarking tests: the hardware environment (the make, model,
 
 Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is your most important criteria (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
 
-### Ease of Use
+### Ease of Use Comparison
 
 I'll split "ease of use" into a few categories:
 
@@ -372,7 +400,7 @@ Mocha, being highly configurable, sometimes necessitates long and difficult to r
 
 AVA is highly configurable, but doesn't include by default a few things. One is seeing the output of all the tests. Enable `verbose` to do that. Another is seeing the time it takes to execute the complete test suite. Adding `time` (a `bash` function) before the command, but it's not as immediately comprehendible - [see this issue](https://github.com/avajs/ava/pull/322). AVA's defaults are extremely minimal, so like Mocha, you may need a complex configuration to serve your needs. Filtering for tests is very similar to the other frameworks (there's a `--match, -m` command that can be repeated.)
 
-### Failure Reporting and Debugging
+### Failure Reporting and Debugging Comparison
 
 All of the frameworks have pleasant to read output, detailed informative diffs for failures, and stack traces that show exactly where errors occurred. They all also offer the ability to debug with node or debugger of your choice. Mocha has an option to enable full stack traces, which may make it slightly more optimal for test failure troubleshooting.
 
@@ -389,7 +417,7 @@ AVA
 
 - See `debug` <https://github.com/avajs/ava/blob/master/docs/05-command-line.md>
 
-### Works with your framework and environment of choice (React, Redux, Electron, etc)
+### Works with your framework and environment of choice (React, Redux, Electron, etc) Comparison
 
 Mocha works for everything. I've had success running React applications and end-to-end tests with Spectron (for Electron applications), amongst other things. It can also run in browser, which is extremely helpful for testing applications that use libraries which are tied directly to browser functionality.
 
@@ -397,37 +425,26 @@ Jest is an all-purpose test-runner and is recommended for testing React applicat
 
 AVA is an all-purpose test-runner, though, it has [yet to support browser testing](https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md). It supports [Puppeteer](https://github.com/avajs/ava/blob/master/docs/recipes/puppeteer.md) for acceptance testing (and may support others).
 
-### Nice to Have
+### Full Comparison (with "Nice to Haves")
 
-Let's recap our findings and fill in some gaps.
+Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = `mocha-parallel-tests`)
 
-> Organization strategies: `describe` and `it` blocks
-
-We saw that Mocha and Jest use these and AVA does not.
-
-> "watch" and "inspect" modes
-
-Included in all the frameworks.
-
-> A variety of assertion capabilities
-
-All the frameworks have these as well as the ability to add custom matchers.
-
-> Ability to add tools like coverage (`nyc`), snapshot testing, etc.
-
-Mocha and AVA allow you to add what you need, Jest has these built-in.
-
-> Mocking / Injecting modules (intercepting require statements)
-
-Jest has its own module/library mocking system. Mocha and AVA require external libraries (examples: [sinon](https://sinonjs.org/), [proxyquire](https://github.com/thlorenz/proxyquire), [inject-loader](https://github.com/plasticine/inject-loader))
-
-> Webpack compilation (injecting of webpack-defined global variables)
-
-For Mocha, [`mochapack`](https://sysgears.github.io/mochapack/) is a library that allows this.
-
-> Babel transpilation of ESNext code and use of alias module import statements (removing the need for `../../`)
-
-All the frameworks allow for babel configuration.
+| Feature                                                                                                       | Notes                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Popularity                                                                                                    | Jest - 1st place. Mocha - 2nd place. AVA - 3rd place. MPT - 4th place.                                                                                                                                                                                 |
+| Maintenance                                                                                                   | Mocha - 1st place. AVA - 2nd place. Jest - 3rd place. MPT - 4th place.                                                                                                                                                                                 |
+| Speed                                                                                                         | MPT - 1st place. AVA - 2nd place. Jest - 3rd place. Mocha - 4th place.                                                                                                                                                                                 |
+| Amount of necessary configuration/dependencies                                                                | Jest - 1st place. AVA - 2nd place. Mocha - 3rd place. MPT - 4th place.                                                                                                                                                                                 |
+| Organization strategies: `describe` and `it` blocks                                                           | Mocha and Jest use these, AVA does not (omits all test globals)                                                                                                                                                                                        |
+| Running the tests                                                                                             | Jest - 1st place. Mocha - 2nd place. MPT - 3rd place. AVA - 4th place.                                                                                                                                                                                 |
+| Failure Reporting and Debugging                                                                               | Mocha slightly above others                                                                                                                                                                                                                            |
+| Works with your framework and environment of choice                                                           | Mocha wins for supporting browser testing                                                                                                                                                                                                              |
+| "watch" and "inspect" modes                                                                                   | Included in all the frameworks.                                                                                                                                                                                                                        |
+| A variety of assertion capabilities                                                                           | All the frameworks have these as well as the ability to add custom matchers                                                                                                                                                                            |
+| Ability to add tools like coverage (nyc), snapshot testing, etc                                               | Mocha and AVA allow you to add what you need, Jest has these built-in                                                                                                                                                                                  |
+| Mocking / Injecting modules (intercepting require statements)                                                 | Jest has its own module/library mocking system. Mocha and AVA require external libraries (examples: [sinon](https://sinonjs.org/), [proxyquire](https://github.com/thlorenz/proxyquire), [inject-loader](https://github.com/plasticine/inject-loader)) |
+| Webpack compilation (injecting of webpack-defined global variables)                                           | For Mocha, [`mochapack`](https://sysgears.github.io/mochapack/) is a library that allows this. [Jest's docs on webpack](https://jestjs.io/docs/en/webpack.html). There's no AVA documentation for webpack specifically, see below on Babel.            |
+| Babel transpilation of ESNext code and use of alias module import statements (removing the need for `../../`) | All the frameworks allow for babel configuration                                                                                                                                                                                                       |
 
 ## Conclusion
 
