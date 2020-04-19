@@ -41,6 +41,7 @@ repo.)
     - [Works with your framework and environment of choice (React, Redux, Electron, etc) Comparison](#works-with-your-framework-and-environment-of-choice-react-redux-electron-etc-comparison)
     - [Full Comparison (with "Nice to Haves")](#full-comparison-with-%22nice-to-haves%22)
   - [Conclusion](#conclusion)
+    - [Want to contribute?](#want-to-contribute)
     - [External Resources](#external-resources)
 
 ## Overview
