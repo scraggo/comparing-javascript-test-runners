@@ -147,6 +147,8 @@ Now, onto comparing the test runners themselves. Here's an overview of each one:
 
 ### AVA
 
+![Ava Logo](images/logo-ava.png)
+
 <https://github.com/avajs/ava>
 
 The magic of AVA is in its simplicity. It's minimal, fast, concurrent, and has a simple syntax that entirely removes the use of globals (like `describe`, `it`, etc.) It supports asynchronous behavior out of the box. AVA has a small team of three developers, one being open-source heavyweight `@sindresorhus`. Some other selling points directly from their readme:
@@ -161,6 +163,8 @@ The magic of AVA is in its simplicity. It's minimal, fast, concurrent, and has a
 
 ### Jest
 
+![Jest Logo](images/logo-jest.png)
+
 <https://jestjs.io/>
 
 Jest is feature-packed, aiming to solve _everything_ in one package, with a focus on making the experience delightful for the test author. It's written and maintained by Facebook and is extremely popular and community supported due to the ubiquity of React and `create-react-app`. The CLI output is colorful and interactive with detailed exception reporting and diffing. Snapshot testing, mocking, and coverage reporting are all built-in. Also included are globals like `it` and `describe` as well as a custom assertion library (similar to `chai`). It also touts:
@@ -172,6 +176,8 @@ Jest is feature-packed, aiming to solve _everything_ in one package, with a focu
 > great api - From `it` to `expect` - Jest has the entire toolkit in one place. Well documented, well maintained, well good.
 
 ### Mocha
+
+![Mocha Logo](images/logo-mocha.png)
 
 <https://mochajs.org/>
 
@@ -397,11 +403,35 @@ Since the frameworks have drastically different styles and similar capabilities,
 | mocha-parallel-tests | Mocha's non-interactive CLI    |
 | AVA                  | non-interactive CLI            |
 
-Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI.
+Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI. It's text output is not only a pleasure to look at, it also includes all the information you could need:
+
+```txt
+...
+PASS  test/file.spec.js
+...
+
+Test Suites: 50 passed, 50 total
+Tests:       1250 passed, 1250 total
+Snapshots:   0 total
+Time:        10.753s
+Ran all test suites.
+```
+
+![Jest Output](images/output-jest.png)
 
 Mocha, being highly configurable, sometimes necessitates long and difficult to read commands to run test suites. Once this command is set, it may need to be altered to filter for files. I wind up making a lot of slightly varied package.json script commands to capture the variations I'm looking for. Once these are set, tests run smoothly and the output and diffs are informative and legible. (Also remember the wide range of output styles available.)
 
+![Mocha Output](images/output-mocha.png)
+
+![Mocha Parallel Tests Output](images/output-mpt.png)
+
+_Above: Mocha and mocha-parallel-tests output_
+
 AVA is highly configurable, but doesn't include by default a few things. One is seeing the output of all the tests. Enable `verbose` to do that. Another is seeing the time it takes to execute the complete test suite. Adding `time` (a `bash` function) before the command, but it's not as immediately comprehendible - [see this issue](https://github.com/avajs/ava/pull/322). AVA's defaults are extremely minimal, so like Mocha, you may need a complex configuration to serve your needs. Filtering for tests is very similar to the other frameworks (there's a `--match, -m` command that can be repeated.)
+
+![AVA Output](images/output-ava.png)
+
+_Refer to "real" for time taken to run all the tests_
 
 ### Failure Reporting and Debugging Comparison
 
