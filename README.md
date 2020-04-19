@@ -1,8 +1,8 @@
-# Comparing JavaScript Testing Frameworks
+# Comparing JavaScript Test Runners
 
-![compare-javascript-testing-frameworks.png](compare-javascript-testing-frameworks.png)
+![comparing-javascript-test-runners.png](images/comparing-javascript-test-runners.png)
 
-JavaScript testing frameworks for comparison:
+JavaScript test runners for comparison:
 
 - Ava
 - Jest
@@ -10,14 +10,17 @@ JavaScript testing frameworks for comparison:
 
 This repo contains two things:
 
-1. A node application that has the capability of running multiple tests in all of these frameworks. [Permalink](https://github.com/scraggo/compare-javascript-testing-frameworks/blob/master/README.md)
-2. [A companion article](./compare-javascript-testing-frameworks.md) - an in-depth comparison of these frameworks. This article gives context about the motivation for making this application. [Permalink](https://github.com/scraggo/compare-javascript-testing-frameworks/blob/master/compare-javascript-testing-frameworks.md)
+1. A node application that has the capability of running multiple tests in all of these frameworks. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md)
+2. [A companion article](./comparing-javascript-test-runners.md) - an in-depth comparison of these frameworks. This article gives context about the motivation for making this application. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/comparing-javascript-test-runners.md)
 
 ## About the application
 
-In a nutshell, it's a test-runner that can handle multiple testing frameworks.
+In a nutshell, it's a test-runner that can:
 
-The number and length of the tests written to simulate a "true" test run in a significantly sized enterprise codebase. Each test runner has a template that will run the _same exact_ test blocks and take the _same exact_ amount of time in each block. (This is done with a `setTimeout` with a time that increases with each iteration of the loop that generates the test block.)
+- create the same tests that are compatible with multiple testing frameworks
+- run those tests with a comparison of the times it takes to execute them
+
+The number and length of the authored tests simulate a "true" test run in a significantly sized enterprise codebase. Each test runner has a template that will run the _same exact_ test blocks and take the _same exact_ amount of time in each block. (This is done with a `setTimeout` with a time that increases with each iteration of the loop that generates the test block.)
 
 ## Running the tests
 
@@ -42,3 +45,7 @@ The number and length of the tests written to simulate a "true" test run in a si
 `npm run lint` to lint files.
 
 `npm run test` to run the internal codebase tests.
+
+## Want to contribute?
+
+Found a typo? Want to add details or make a correction? This repo is open-source and your contributions are 100% welcome 💥.

@@ -1,7 +1,7 @@
 {
-  "name": "comparing-javascript-testing-frameworks",
+  "name": "comparing-javascript-test-runners",
   "version": "1.0.0",
-  "description": "A comparison of JavaScript testing frameworks",
+  "description": "A comparison of JavaScript test runners",
   "main": "index.js",
   "author": "scraggo@gmail.com",
   "license": "ISC",

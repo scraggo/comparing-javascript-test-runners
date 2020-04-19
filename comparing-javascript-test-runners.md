@@ -1,13 +1,13 @@
-# Comparing JavaScript Testing Frameworks
+# Comparing JavaScript Test Runners
 
-![compare-javascript-testing-frameworks.png](compare-javascript-testing-frameworks.png)
+![comparing-javascript-test-runners.png](images/comparing-javascript-test-runners.png)
 
-[This article](https://github.com/scraggo/compare-javascript-testing-frameworks/blob/master/compare-javascript-testing-frameworks.md) is a comparison of the AVA, Jest, Mocha (along with the Mocha wrapper `mocha-parallel-tests`) JavaScript testing frameworks.
+[This article](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/comparing-javascript-test-runners.md) is a comparison of the AVA, Jest, Mocha (along with the Mocha wrapper `mocha-parallel-tests`) JavaScript test runners.
 
-The article is a companion to [a node application that has the capability of creating and running tests in the frameworks listed above](https://github.com/scraggo/compare-javascript-testing-frameworks) (both part of the <https://github.com/scraggo/compare-javascript-testing-frameworks>
+The article is a companion to [a node application that has the capability of creating and running tests in the frameworks listed above](https://github.com/scraggo/comparing-javascript-test-runners) (both part of the <https://github.com/scraggo/comparing-javascript-test-runners>
 repo.)
 
-- [Comparing JavaScript Testing Frameworks](#comparing-javascript-testing-frameworks)
+- [Comparing JavaScript Test Runners](#comparing-javascript-test-runners)
   - [Overview](#overview)
     - [The Problem](#the-problem)
     - [Goals](#goals)
@@ -24,7 +24,7 @@ repo.)
     - [Failure Reporting and Debugging](#failure-reporting-and-debugging)
     - [Works with your framework and environment of choice (React, Redux, Electron, etc)](#works-with-your-framework-and-environment-of-choice-react-redux-electron-etc)
     - [Nice to Have](#nice-to-have)
-  - [Comparing the Frameworks](#comparing-the-frameworks)
+  - [Comparing the Test Runners](#comparing-the-test-runners)
     - [AVA](#ava)
     - [Jest](#jest)
     - [Mocha](#mocha)
@@ -49,16 +49,16 @@ repo.)
 
 Technology is always changing. As a result, the popular frameworks of today may become unpopular tomorrow. Despite this, we can assume that code should be tested and there are general principles we can adhere to.
 
-In recent years, JavaScript has become a more robust language thanks to the steady cadence of enhancements starting with ES6/2015. As a result, many front-end frameworks can accomplish the task of creating serious web applications. In general, these frameworks are much easier to test than frameworks of years past. Three testing frameworks have risen far above the rest as the most popular choices:
+In recent years, JavaScript has become a more robust language thanks to the steady cadence of enhancements starting with ES6/2015. As a result, many front-end frameworks can accomplish the task of creating serious web applications. In general, these frameworks are much easier to test than frameworks of years past. Three test runners have risen far above the rest as the most popular choices:
 
 - AVA <https://github.com/avajs/ava>
 - Jest <https://jestjs.io/>
 - Mocha <https://mochajs.org/>
-  - and an interesting plugin called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
+  - and an interesting wrapper called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
 
 ### Goals
 
-The immediate practical goal of this article is to help you choose a JavaScript testing framework. My aim is to address the following questions:
+The immediate practical goal of this article is to help you choose a JavaScript testing framework. (Note: I'll be using "test runner" and "testing framework" interchangeably.) My aim is to address the following questions:
 
 **How does one choose the right testing framework for their use case? What criteria should one base their decision on?**
 
@@ -141,9 +141,9 @@ Depending on what you need to test, a framework should support:
 - Babel transpilation of ESNext code
   - Use of alias module import statements (removing the need for `../../`)
 
-## Comparing the Frameworks
+## Comparing the Test Runners
 
-Now, onto comparing the frameworks themselves. Here's an overview of each framework:
+Now, onto comparing the test runners themselves. Here's an overview of each one:
 
 ### AVA
 
@@ -451,7 +451,11 @@ Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = 
 
 ## Conclusion
 
-I hope this article was helpful! Whether it be in furthering your own investigation, giving you a place to start with learning a framework, or helping your team choose a framework for testing applications. Don't hesitate to [contact me](https://www.scraggo.com/) if you have questions or feedback.
+I hope this article was helpful - whether it be in furthering your own investigation, giving you a place to start with learning, or helping your team choose the right test runner for your applications. Don't hesitate to [contact me](https://www.scraggo.com/) if you have questions or feedback.
+
+### Want to contribute?
+
+Found a typo? Want to add details or make a correction? This repo is open-source and your contributions are 100% welcome 💥.
 
 ### External Resources
 
