@@ -404,7 +404,13 @@ Since the frameworks have drastically different styles and similar capabilities,
 | mocha-parallel-tests | Mocha's non-interactive CLI    |
 | AVA                  | non-interactive CLI            |
 
-Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI. It's text output is not only a pleasure to look at, it also includes all the information you could need:
+Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI.
+
+![Jest CLI1](images/jest-cli1.png)
+![Jest CLI2](images/jest-cli2.png)
+![Jest CLI3](images/jest-cli3.png)
+
+It's text output is not only a pleasure to look at, it also includes all the information you could need:
 
 ```txt
 ...
@@ -420,6 +426,8 @@ Ran all test suites.
 
 ![Jest Output](images/output-jest.png)
 
+_Above: Jest output on successful test run_
+
 Mocha, being highly configurable, sometimes necessitates long and difficult to read commands to run test suites. Once this command is set, it may need to be altered to filter for files. I wind up making a lot of slightly varied package.json script commands to capture the variations I'm looking for. Once these are set, tests run smoothly and the output and diffs are informative and legible. (Also remember the wide range of output styles available.)
 
 ![Mocha Output](images/output-mocha.png)
@@ -432,7 +440,7 @@ AVA is highly configurable, but doesn't include by default a few things. One is 
 
 ![AVA Output](images/output-ava.png)
 
-_Refer to "real" for time taken to run all the tests_
+_Above: AVA output. Refer to "real" for time taken to run all the tests_
 
 ### Failure Reporting and Debugging Comparison
 
