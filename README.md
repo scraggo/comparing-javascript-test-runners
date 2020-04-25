@@ -4,9 +4,9 @@
 
 <https://github.com/scraggo/comparing-javascript-test-runners>
 
-[This article](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md) is a comparison of the AVA, Jest, Mocha, and `mocha-parallel-tests` JavaScript test runners.
+This article is a comparison of the AVA, Jest, Mocha, and `mocha-parallel-tests` JavaScript test runners. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md)
 
-To generate the speed metrics in the article, I created a node application that runs tests in all the frameworks listed above. [See the documentation here](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/docs/test-runner.md).
+To generate the speed metrics in the article, I created a node application (part of this repo) that runs tests in all the frameworks listed above. [See the documentation here](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/docs/test-runner.md).
 
 - [Comparing JavaScript Test Runners](#comparing-javascript-test-runners)
   - [Overview](#overview)

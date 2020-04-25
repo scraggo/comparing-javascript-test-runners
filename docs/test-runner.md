@@ -4,20 +4,20 @@
 
 JavaScript test runners for comparison:
 
-- Ava
+- AVA
 - Jest
-- Mocha (and an interesting plugin called mocha-parallel-tests)
+- Mocha (and an interesting plugin called `mocha-parallel-tests`)
 
 This repo contains two things:
 
-1. A node application that has the capability of running multiple tests in all of these frameworks. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/docs/test-runner.md)
-2. [A companion article](../README.md) - an in-depth comparison of these frameworks. This article gives context about the motivation for making this application. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md)
+1. A node application that has the capability of running tests in all these frameworks. [Documentation Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/docs/test-runner.md)
+2. [A companion article](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md) that does an in-depth comparison of these frameworks and gives context about the motivation behind this application. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md)
 
 ## About the application
 
-In a nutshell, it's a test-runner that can:
+This application is a test-runner that can:
 
-- create the same tests that are compatible with multiple testing frameworks
+- create the same tests that are compatible with the testing frameworks above
 - run those tests with a comparison of the times it takes to execute them
 
 The number and length of the authored tests simulate a "true" test run in a significantly sized enterprise codebase. Each test runner has a template that will run the _same exact_ test blocks and take the _same exact_ amount of time in each block. (This is done with a `setTimeout` with a time that increases with each iteration of the loop that generates the test block.)
@@ -30,7 +30,7 @@ The number and length of the authored tests simulate a "true" test run in a sign
 
 `npm run make-tests` to generate test files.
 
-`npm run test-all` to run all the generated tests and see a diagnostic output.
+`npm run test-all` to run **all** the generated tests and see a diagnostic output.
 
 `npm run test-ava` to run the generated `ava` tests
 
