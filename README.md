@@ -53,9 +53,9 @@ Technology is always changing. As a result, the popular frameworks of today may 
 
 In recent years, JavaScript has become a more robust language thanks to the steady cadence of enhancements starting with ES6/2015. As a result, many front-end frameworks can accomplish the task of creating serious web applications. In general, these frameworks are much easier to test than frameworks of years past. Three test runners have risen far above the rest as the most popular choices:
 
-- AVA <https://github.com/avajs/ava>
-- Jest <https://jestjs.io/>
-- Mocha <https://mochajs.org/>
+- AVA - <https://github.com/avajs/ava>
+- Jest - <https://jestjs.io/>
+- Mocha - <https://mochajs.org/>
   - and an interesting wrapper called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
 
 ### Goals
@@ -156,11 +156,11 @@ Now, onto comparing the test runners themselves. Here's an overview of each one:
 The magic of AVA is in its simplicity. It's minimal, fast, concurrent, and has a simple syntax that entirely removes the use of globals (like `describe`, `it`, etc.) It supports asynchronous behavior out of the box. AVA has a small team of three developers, one being open-source heavyweight `@sindresorhus`. Some other selling points directly from their readme:
 
 > AVA is a test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that let you write tests more effectively.
-
+>
 > AVA adds code excerpts and clean diffs for actual and expected values. If values in the assertion are objects or arrays, only a diff is displayed, to remove the noise and focus on the problem.
-
+>
 > AVA automatically removes unrelated lines in stack traces, allowing you to find the source of an error much faster, as seen above.
-
+>
 > AVA automatically detects whether your CI environment supports parallel builds. Each build will run a subset of all test files, while still making sure all tests get executed. See the ci-parallel-vars package for a list of supported CI environments.
 
 ### Jest
@@ -172,9 +172,9 @@ The magic of AVA is in its simplicity. It's minimal, fast, concurrent, and has a
 Jest is feature-packed, aiming to solve _everything_ in one package, with a focus on making the experience delightful for the test author. It's written and maintained by Facebook and is extremely popular and community supported due to the ubiquity of React and `create-react-app`. The CLI output is colorful and interactive with detailed exception reporting and diffing. Snapshot testing, mocking, and coverage reporting are all built-in. Also included are globals like `it` and `describe` as well as a custom assertion library (similar to `chai`). It also touts:
 
 > zero config - Jest aims to work out of the box, config free, on most JavaScript projects.
-
+>
 > isolated - Tests are parallelized by running them in their own processes to maximize performance.
-
+>
 > great api - From `it` to `expect` - Jest has the entire toolkit in one place. Well documented, well maintained, well good.
 
 ### Mocha
@@ -186,9 +186,9 @@ Jest is feature-packed, aiming to solve _everything_ in one package, with a focu
 Being the most established of the testing frameworks, Mocha enjoys a solid place in the JavaScript community. It's been around since 2011 and is maintained by the OpenJS Foundation and contributors. Mocha supports numerous command-line options and configurations. It's generally used in tandem with external libraries - `assert` or `chai` could take care of your assertion needs and `sinon` could take care of your mocking needs. The `it` and `describe` blocks mentioned by Jest were pioneered by Mocha (along with the `beforeEach`, `afterEach`, and other pre/post hooks). In addition to being able to run in `node`, you can also run tests in the browser giving you full access to the DOM. There's also a dizzying array of test reporting styles (one being Nyan cat.) In its own words:
 
 > Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser, making asynchronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.
-
+>
 > Mocha is the most-depended-upon module on npm (source: libraries.io)
-
+>
 > The SuperAgent request library test documentation was generated with Mocha's doc reporter
 
 ### mocha-parallel-tests
@@ -198,11 +198,11 @@ Being the most established of the testing frameworks, Mocha enjoys a solid place
 `mocha-parallel-tests` is not a testing framework. It's a wrapper over Mocha designed to significantly speed it up. It's new in 2019 and has a small team. I'll go into detail on why I'm including it here (and what "parallel" means) in the "speed" portion of this article. From the readme:
 
 > `mocha-parallel-tests` is a test runner for tests written with mocha testing framework which allows you to run them in parallel.
-
+>
 > `mocha-parallel-tests` executes each of your test files in a separate process while maintaining the output structure of mocha.
-
+>
 > Compared to the other tools which try to parallelize mocha tests execution, `mocha-parallel-tests` doesn't require you to write the code in a different way or use some specific APIs - just run your tests with `mocha-parallel-tests` instead of mocha and you will see the difference. Or if you prefer to use mocha programmatic API replace it with `mocha-parallel-tests` default export and you're done!
-
+>
 > If you're using Node.JS >= 12 your tests execution will be even faster because `mocha-parallel-tests` supports running tests with Node.JS worker threads API.
 
 ### Popularity and Community Comparison
