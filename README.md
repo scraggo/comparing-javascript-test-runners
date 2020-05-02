@@ -505,3 +505,10 @@ Found a typo? Want to add details or make a correction? This repo is open-source
 - <https://stackshare.io/stackups/ava-vs-mocha>
 - <https://raygun.com/blog/javascript-unit-testing-frameworks/>
 - <http://zpalexander.com/migrating-from-mocha-to-ava/>
+
+More on the testing frameworks:
+
+- <https://github.com/avajs/awesome-ava#readme>
+- <https://github.com/jest-community/awesome-jest>
+- <https://devdocs.io/mocha/>
+- [The Ultimate Unit Testing Cheat-sheet For Mocha, Chai and Sinon](https://gist.github.com/yoavniran/1e3b0162e1545055429e)
