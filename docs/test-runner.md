@@ -6,7 +6,7 @@ JavaScript test runners for comparison:
 
 - AVA
 - Jest
-- Mocha (and an interesting plugin called `mocha-parallel-tests`)
+- Mocha (and an interesting wrapper called `mocha-parallel-tests`)
 
 This repo contains two things:
 
