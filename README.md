@@ -207,14 +207,14 @@ Being the most established of the testing frameworks, Mocha enjoys a solid place
 
 ### Popularity and Community Comparison
 
-Now that we know a bit about each framework, lets look at the popularity and publish frequency of each one.
+Now that we know a bit about each framework, lets look at some of their popularity, publish frequency, and other community metrics.
 
-|                      | Weekly Downloads | Last Publish |
-| -------------------- | ---------------- | ------------ |
-| Jest                 | 7.2 million      | 2020-03-26   |
-| Mocha                | 4.3 million      | 2020-03-18   |
-| AVA                  | 227,179          | 2020-03-22   |
-| mocha-parallel-tests | 18,097           | 2020-02-08   |
+|                      | Weekly Downloads | Last Publish | Publishes This Year | Contributors |
+| -------------------- | ---------------- | ------------ | ------------------- | ------------ |
+| Jest                 | 7.2 million      | 2020-05-05   | 27                  | 1083         |
+| Mocha                | 4.3 million      | 2020-04-24   | 11                  | 439          |
+| AVA                  | 227,179          | 2020-05-08   | 20                  | 243          |
+| mocha-parallel-tests | 18,097           | 2020-02-08   | 4                   | 14           |
 
 Jest is clearly the most popular framework with 7.2 million weekly downloads. It was published most recently and is updated very frequently. Its popularity can be partially attributed to the popularity of the React library. Jest is shipped with `create-react-app` and is recommended for use in React's documentation.
 
@@ -319,7 +319,9 @@ Mocha - 3rd place
 - Configure in package.json or an override file
 - Many, many CLI options
 - Good documentation (slightly opaque and a lot to read through), lots of tutorials and examples (in and out of Mocha's docs)
-- Assertions, coverage reporting, snapshot tests, mocking modules and libraries (everything) must be imported from elsewhere
+- Assertions\*, coverage reporting, snapshot tests, mocking modules and libraries (everything) must be imported from elsewhere
+
+\* node's built-in `assert` is commonly used with Mocha for assertions. While it's not built into Mocha, it can be easily imported: `const assert = require('assert')`.
 
 mocha-parallel-tests - 4th place
 
