@@ -41,6 +41,7 @@ To generate the speed metrics in the article, I created a node application (part
     - [Failure Reporting and Debugging Comparison](#failure-reporting-and-debugging-comparison)
     - [Works with your framework and environment of choice (React, Redux, Electron, etc) Comparison](#works-with-your-framework-and-environment-of-choice-react-redux-electron-etc-comparison)
     - [Full Comparison (with "Nice to Haves")](#full-comparison-with-%22nice-to-haves%22)
+  - [Recommendations](#recommendations)
   - [Conclusion](#conclusion)
     - [Want to contribute?](#want-to-contribute)
     - [External Resources](#external-resources)
@@ -490,6 +491,14 @@ Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = 
 | Mocking / Injecting modules (intercepting require statements)                                                 | Jest has its own module/library mocking system. Mocha and AVA require external libraries (examples: [sinon](https://sinonjs.org/), [proxyquire](https://github.com/thlorenz/proxyquire), [inject-loader](https://github.com/plasticine/inject-loader)) |
 | Webpack compilation (injecting of webpack-defined global variables)                                           | For Mocha, [`mochapack`](https://sysgears.github.io/mochapack/) is a library that allows this. [Jest's docs on webpack](https://jestjs.io/docs/en/webpack.html). There's no AVA documentation for webpack specifically, see below on Babel.            |
 | Babel transpilation of ESNext code and use of alias module import statements (removing the need for `../../`) | All the frameworks allow for babel configuration                                                                                                                                                                                                       |
+
+## Recommendations
+
+As you can see, all the frameworks are incredibly robust for most testing needs. However, if you picked one at random, it might not work for a specific use case. It's not an easy choice, but here's how I'd break it down:
+
+- AVA is recommended if you want a fast, easy to configure, and minimalist aesthetic framework with no globals. You don't need hierarchical `describe` blocks and you want to support a smaller project.
+- Mocha is recommended if you want your tests to run in any environment. It's incredibly community-supported and is extend-able with your favorite 3rd-party packages. Using `mocha-parallel-tests` would give you a speed advantage.
+- Jest is recommended if you want a popular framework that has everything built in with very little configuration necessary. It's the jack-of-all-trades of test runners. It has a delightful command line experience. Finally, it's an excellent pair with React.
 
 ## Conclusion
 
