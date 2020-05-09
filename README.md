@@ -210,18 +210,18 @@ Being the most established of the testing frameworks, Mocha enjoys a solid place
 
 Now that we know a bit about each framework, lets look at some of their popularity, publish frequency, and other community metrics.
 
-|                      | Weekly Downloads | Last Publish | Publishes This Year | Contributors |
+|                      | Weekly Downloads | Last Publish | Publishes in 1 Year | Contributors |
 | -------------------- | ---------------- | ------------ | ------------------- | ------------ |
 | Jest                 | 7.2 million      | 2020-05-05   | 27                  | 1083         |
 | Mocha                | 4.3 million      | 2020-04-24   | 11                  | 439          |
 | AVA                  | 227,179          | 2020-05-08   | 20                  | 243          |
 | mocha-parallel-tests | 18,097           | 2020-02-08   | 4                   | 14           |
 
-Jest is clearly the most popular framework with 7.2 million weekly downloads. It was published most recently and is updated very frequently. Its popularity can be partially attributed to the popularity of the React library. Jest is shipped with `create-react-app` and is recommended for use in React's documentation.
+🥇Jest is clearly the most popular framework with 7.2 million weekly downloads. It was published most recently and is updated very frequently. Its popularity can be partially attributed to the popularity of the React library. Jest is shipped with `create-react-app` and is recommended for use in React's documentation.
 
-Mocha comes in second place with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is the test runner of many, many applications.
+🥈Mocha comes in second place with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is the test runner of many, many applications.
 
-AVA has 227,179 weekly downloads, an order of magnitude fewer than the most popular frameworks. This may be due to its (arguably niche) focus on minimalism or it having a small team that doesn't have the resources to promote the library.
+🥉AVA has 227,179 weekly downloads, an order of magnitude fewer than the most popular frameworks. This may be due to its (arguably niche) focus on minimalism or it having a small team that doesn't have the resources to promote the library.
 
 `mocha-parallel-tests` has 18,097 weekly downloads and doesn't enjoy as frequent updates as the major three. It's extremely new and not a framework.
 
@@ -234,11 +234,11 @@ In general, more popularity brings more community involvement. The number of ope
 | Jest                 | 844         | 4343          | 5187  | 16.2% |
 | mocha-parallel-tests | 37          | 111           | 148   | 25.0% |
 
-Mocha has the lowest ratio of open to closed issues, making it the most successfully maintained library. It's stability surely correlates with its longevity (and vice versa.)
+🥇Mocha has the lowest ratio of open to closed issues, making it the most successfully maintained library. It's stability surely correlates with its longevity (and vice versa.)
 
-AVA is 2nd place. This is quite impressive given its small team.
+🥈AVA is 2nd place. This is quite impressive given its small team.
 
-Jest is 3rd place. This comes as no surprise given that it has the most issues to deal with.
+🥉Jest is 3rd place. This comes as no surprise given that it has the most issues to deal with.
 
 `mocha-parallel-tests` has the fewest number of total issues by far but the highest ratio. It doesn't have a significant financial backing like the other frameworks do.
 
@@ -267,9 +267,9 @@ To generate the speed metrics in the article, I created a node application that 
 | Jest                 | 12.5s | parallel |
 | Mocha                | 16.2s | serial   |
 
-A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll mostly be analyzing the speeds relative to each other.
+A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll only be considering the speeds relative to each other.
 
-`mocha-parallel-tests` is the clear winner in this run. AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) Jest is also fast, but seems to have a bit more overhead than the other two.
+🥇`mocha-parallel-tests` is the clear winner in this run. 🥈AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) 🥉Jest is also fast, but seems to have a bit more overhead than the other two.
 
 Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is your most important criteria (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
 
@@ -290,9 +290,7 @@ I'll split "ease of use" into a few categories:
 | Mocha                | Many, many options                        | externals always necessary        |
 | mocha-parallel-tests | (Most of mocha CLI options are supported) | Mocha                             |
 
-Jest - 1st place
-
-Jest takes the cake in this department. Using its defaults wherever possible, you could have close to zero configuration.
+🥇Jest takes the cake in this department. Using its defaults wherever possible, you could have close to zero configuration.
 
 > Jest's configuration can be defined in the package.json file of your project, or through a jest.config.js file or through the --config <path/to/file.js|cjs|mjs|json> option. If you'd like to use your package.json to store Jest's config, the "jest" key should be used on the top level so Jest will know how to find your settings
 
@@ -301,7 +299,7 @@ Jest takes the cake in this department. Using its defaults wherever possible, yo
 - Built-in snapshot tests, coverage reporting, mocking modules and libraries
 - Excellent documentation, lots of tutorials and examples
 
-AVA - 2nd place
+🥈AVA comes in 2nd place.
 
 - Sensible defaults for finding tests (see Jest's defaults)
 - Configure in package.json, an ava.config.\* file, or another override file in the directory root
@@ -312,7 +310,7 @@ AVA - 2nd place
 - Good documentation, few tutorials and examples
 - Coverage reporting, mocking modules and libraries must be imported from elsewhere
 
-Mocha - 3rd place
+🥉Mocha comes in 3rd place.
 
 > By default, mocha looks for the glob `"./test/*.js"`, so you may want to put your tests in `test/` folder. If you want to include subdirectories, pass the `--recursive` option.
 
@@ -324,12 +322,9 @@ Mocha - 3rd place
 
 \* node's built-in `assert` is commonly used with Mocha for assertions. While it's not built into Mocha, it can be easily imported: `const assert = require('assert')`.
 
-mocha-parallel-tests - 4th place
+For mocha-parallel-tests, run tests as you would with Mocha. There is a caveat:
 
 > Most of mocha CLI options are supported. If you're missing some of the options support you're welcome to submit a PR: all options are applied in a same simple way.
-
-- Run tests as you would with Mocha. See above
-- Not all of Mocha's options are available
 
 #### Writing the tests
 
@@ -408,7 +403,7 @@ Since the frameworks have drastically different styles and similar capabilities,
 | mocha-parallel-tests | Mocha's non-interactive CLI    |
 | AVA                  | non-interactive CLI            |
 
-Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI.
+🥇Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI.
 
 ![Jest CLI1](images/jest-cli1.png)
 ![Jest CLI2](images/jest-cli2.png)
@@ -432,7 +427,7 @@ Ran all test suites.
 
 _Above: Jest output on successful test run_
 
-Mocha, being highly configurable, sometimes necessitates long and difficult to read commands to run test suites. Once this command is set, it may need to be altered to filter for files. I wind up making a lot of slightly varied package.json script commands to capture the variations I'm looking for. Once these are set, tests run smoothly and the output and diffs are informative and legible. (Also remember the wide range of output styles available.)
+🥈Mocha, being highly configurable, sometimes necessitates long and difficult to read commands to run test suites. Once this command is set, it may need to be altered to filter for files. I wind up making a lot of slightly varied package.json script commands to capture the variations I'm looking for. Once these are set, tests run smoothly and the output and diffs are informative and legible. (Also remember the wide range of output styles available.)
 
 ![Mocha Output](images/output-mocha.png)
 
@@ -440,7 +435,7 @@ Mocha, being highly configurable, sometimes necessitates long and difficult to r
 
 _Above: Mocha and mocha-parallel-tests output_
 
-AVA is highly configurable, but doesn't include by default a few things. One is seeing the output of all the tests. Enable `verbose` to do that. Another is seeing the time it takes to execute the complete test suite. Adding `time` (a `bash` function) before the command, but it's not as immediately comprehendible - [see this issue](https://github.com/avajs/ava/pull/322). AVA's defaults are extremely minimal, so like Mocha, you may need a complex configuration to serve your needs. Filtering for tests is very similar to the other frameworks (there's a `--match, -m` command that can be repeated.)
+🥉AVA is highly configurable, but there are a few things not included by default that I miss. One is seeing the output of all the tests. Enable `verbose` to do that. Another is seeing the time it takes to execute the complete test suite. Adding `time` (a `bash` function) before the command, but it's not as immediately comprehendible - [see this issue](https://github.com/avajs/ava/pull/322). AVA's defaults are extremely minimal, so like Mocha, you may need a complex configuration to serve your needs. Filtering for tests is very similar to the other frameworks (there's a `--match, -m` command that can be repeated.)
 
 ![AVA Output](images/output-ava.png)
 
@@ -465,11 +460,11 @@ AVA
 
 ### Works with your framework and environment of choice (React, Redux, Electron, etc) Comparison
 
-Mocha works for everything. I've had success running React applications and end-to-end tests with Spectron (for Electron applications), amongst other things. It can also run in browser, which is extremely helpful for testing applications that use libraries which are tied directly to browser functionality.
+🥇Mocha works for everything. I've had success running React applications and end-to-end tests with Spectron (for Electron applications), amongst other things. It can also run in browser, which is extremely helpful for testing applications that use libraries which are tied directly to browser functionality.
 
-Jest is an all-purpose test-runner and is recommended for testing React applications. It doesn't have support for browser testing (as far as I can tell.) It supports [Puppeteer](https://jestjs.io/docs/en/puppeteer) for acceptance testing (and may support others).
+🥈Jest is an all-purpose test-runner and is recommended for testing React applications. It doesn't have support for browser testing (as far as I can tell.) It supports [Puppeteer](https://jestjs.io/docs/en/puppeteer) for acceptance testing (and may support others).
 
-AVA is an all-purpose test-runner, though, it has [yet to support browser testing](https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md). It supports [Puppeteer](https://github.com/avajs/ava/blob/master/docs/recipes/puppeteer.md) for acceptance testing (and may support others).
+🥉AVA is an all-purpose test-runner, though, it has [yet to support browser testing](https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md). It supports [Puppeteer](https://github.com/avajs/ava/blob/master/docs/recipes/puppeteer.md) for acceptance testing (and may support others).
 
 ### Full Comparison (with "Nice to Haves")
 
