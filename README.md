@@ -496,9 +496,9 @@ Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = 
 
 As you can see, all the frameworks are incredibly robust for most testing needs. However, if you picked one at random, it might not work for a specific use case. It's not an easy choice, but here's how I'd break it down:
 
-- AVA is recommended if you want a fast, easy to configure, and minimalist aesthetic framework with no globals. You don't need hierarchical `describe` blocks and you want to support a smaller project.
-- Mocha is recommended if you want your tests to run in any environment. It's incredibly community-supported and is extend-able with your favorite 3rd-party packages. Using `mocha-parallel-tests` would give you a speed advantage.
-- Jest is recommended if you want a popular framework that has everything built in with very little configuration necessary. It's the jack-of-all-trades of test runners. It has a delightful command line experience. Finally, it's an excellent pair with React.
+- 🏅Mocha is recommended if you want your tests to run in any environment. It's incredibly community-supported and is extend-able with your favorite 3rd-party packages. Using `mocha-parallel-tests` would give you a speed advantage.
+- 🏅Jest is recommended if you want a popular framework that has everything built in with very little configuration necessary. It's the jack-of-all-trades of test runners. It has a delightful command line experience. Finally, it's an excellent pair with React.
+- 🏅AVA is recommended if you want a minimalist framework with no globals. AVA is fast, easy to configure, and you get ES-Next transpilation out of the box. You don't want hierarchical `describe` blocks and you want to support a smaller project.
 
 ## Conclusion
 
@@ -510,16 +510,41 @@ Found a typo? Want to add details or make a correction? This repo is open-source
 
 ### External Resources
 
-- Node.js & JavaScript Testing Best Practices (2020) - Medium: <https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347>
+Articles:
+
+- [Node.js & JavaScript Testing Best Practices (2020) - Medium](https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347)
 - <https://npmcompare.com/compare/ava,jest,mocha,mocha-parallel-tests>
 - <https://www.slant.co/versus/12696/12697/~mocha_vs_jest>
 - <https://stackshare.io/stackups/ava-vs-mocha>
 - <https://raygun.com/blog/javascript-unit-testing-frameworks/>
-- <http://zpalexander.com/migrating-from-mocha-to-ava/>
 
-More on the testing frameworks:
+More on Mocha:
 
-- <https://github.com/avajs/awesome-ava#readme>
-- <https://github.com/jest-community/awesome-jest>
 - <https://devdocs.io/mocha/>
 - [The Ultimate Unit Testing Cheat-sheet For Mocha, Chai and Sinon](https://gist.github.com/yoavniran/1e3b0162e1545055429e)
+
+More on Jest:
+
+- <https://github.com/jest-community/awesome-jest>
+- <https://jestjs.io/docs/en/migration-guide.html>
+- [Migrating from Mocha to Jest - Airbnb Engineering & Data Science - Medium](https://medium.com/airbnb-engineering/unlocking-test-performance-migrating-from-mocha-to-jest-2796c508ec50)
+
+More on AVA:
+
+- <https://github.com/avajs/awesome-ava#readme>
+- <http://zpalexander.com/migrating-from-mocha-to-ava/>
+- [AVA, low-config testing for JavaScript - hello JS](https://blog.hellojs.org/ava-low-config-testing-for-javascript-71bd2d958745)
+- [Ava Test Runner - A Fresh Take On JavaScript Testing and Growing an Open-Source Project - Sessions by Pusher](https://pusher.com/sessions/meetup/the-js-roundabout/ava-test-runner-a-fresh-take-on-javascript-testing-and-growing-an-open-source-project)
+
+Packages:
+
+| Package URL                                                         | Category     | Works With | Notes                                                                                                            |
+| ------------------------------------------------------------------- | ------------ | ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| [nyc - istanbul](https://istanbul.js.org/)                          | coverage     | AVA, Mocha |                                                                                                                  |
+| [sinon](https://sinonjs.org/)                                       | mocking      | AVA, Mocha |                                                                                                                  |
+| [proxyquire](https://github.com/thlorenz/proxyquire)                | mock-require | AVA, Mocha |                                                                                                                  |
+| [inject-loader](https://github.com/plasticine/inject-loader)        | mock-require | AVA, Mocha |                                                                                                                  |
+| [chai](https://www.chaijs.com/)                                     | assertions   | Mocha      | see [chai plugins](https://www.chaijs.com/plugins/) including `chai-immutable`, `chai-as-promised`, `chai-sinon` |
+| [mocha-snapshots](https://github.com/wellguimaraes/mocha-snapshots) | snapshot     | Mocha      |                                                                                                                  |
+| [mochapack](https://sysgears.github.io/mochapack/)                  | webpack      | Mocha      |                                                                                                                  |
+| [Majestic](https://github.com/Raathigesh/majestic/)                 | GUI          | Jest       |                                                                                                                  |
