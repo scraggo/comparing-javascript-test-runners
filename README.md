@@ -283,12 +283,11 @@ I'll split "ease of use" into a few categories:
 
 ### Amount of necessary configuration/dependencies
 
-|                      | Configuration                             | Dependencies                      |
-| -------------------- | ----------------------------------------- | --------------------------------- |
-| Jest                 | Everything is included                    | built-in                          |
-| AVA                  | Sensible defaults                         | externals necessary in most cases |
-| Mocha                | Many, many options                        | externals always necessary        |
-| mocha-parallel-tests | (Most of mocha CLI options are supported) | Mocha                             |
+|                              | Configuration          | Dependencies             |
+| ---------------------------- | ---------------------- | ------------------------ |
+| Jest                         | Everything is included | built-in                 |
+| AVA                          | Sensible defaults      | some externals necessary |
+| Mocha & mocha-parallel-tests | Many, many options     | most externals necessary |
 
 🥇Jest takes the cake in this department. Using its defaults wherever possible, you could have close to zero configuration.
 
@@ -396,12 +395,11 @@ Since the frameworks have drastically different styles and similar capabilities,
 
 #### Running the tests
 
-|                      | Summary                        |
-| -------------------- | ------------------------------ |
-| Jest                 | interactive CLI                |
-| Mocha                | non-interactive CLI or browser |
-| mocha-parallel-tests | Mocha's non-interactive CLI    |
-| AVA                  | non-interactive CLI            |
+|                              | Summary                        |
+| ---------------------------- | ------------------------------ |
+| Jest                         | interactive CLI                |
+| Mocha & mocha-parallel-tests | non-interactive CLI or browser |
+| AVA                          | non-interactive CLI            |
 
 🥇Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI.
 
