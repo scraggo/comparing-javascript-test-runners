@@ -2,7 +2,7 @@ const { promises: fsPromises } = require('fs');
 const { range } = require('../range');
 const { TEMPLATE_PATHS, TEST_RUNNERS } = require('./config');
 
-const getTestFilename = (num, testDir, testRunner) =>
+const createTestFilename = (num, testDir, testRunner) =>
   `${testDir}/${testRunner}-fullCircle${num}.spec.js`;
 
 // get testTemplate file as a string
@@ -15,7 +15,10 @@ const getTemplateFile = async templateFilePath =>
 const makeALotOfTestFiles = (template, testDir, testRunner) =>
   Promise.resolve(
     range(0, 50).map(num =>
-      fsPromises.writeFile(getTestFilename(num, testDir, testRunner), template)
+      fsPromises.writeFile(
+        createTestFilename(num, testDir, testRunner),
+        template
+      )
     )
   );
 

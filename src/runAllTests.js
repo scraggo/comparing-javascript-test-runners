@@ -98,7 +98,6 @@ const main = () => {
 
       console.log('running tests for', name, '\n. . . . . . . . ');
 
-      // eslint-disable-next-line no-await-in-loop
       testData[name].executionTime = run();
       testResults.push(testData[name]);
     }
