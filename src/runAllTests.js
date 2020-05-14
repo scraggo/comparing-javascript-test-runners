@@ -1,8 +1,10 @@
 const execa = require('execa');
+const { shuffle } = require('./');
 
 // CONSTANTS
 
-const testRunners = ['ava', 'jest', 'mocha', 'parallel'];
+const TEST_RUNNERS = ['ava', 'jest', 'mocha', 'parallel'];
+const testRunners = shuffle(TEST_RUNNERS);
 
 // UTILS
 
@@ -104,8 +106,8 @@ const main = () => {
 
     console.log(`-*-*-*-*-*-*-*-*-*-*-
       RESULTS
--*-*-*-*-*-*-*-*-*-*-`);
-
+-*-*-*-*-*-*-*-*-*-*-\n`);
+    console.log('order:', testRunners, '\n');
     logResults(testResults);
   } catch (error) {
     console.error(error);
