@@ -24,6 +24,8 @@ The number and length of the authored tests simulate a "true" test run in a sign
 
 To account for a bias in ordering, the scripts corresponding to each test runner are shuffled. This ensures that the suites for each test runner are never called in the same sequence.
 
+![speed-test-results.png](../images/speed-test-results.png)
+
 ## Running the tests
 
 `npm install` to install all the packages.
