@@ -4,6 +4,7 @@ const { shuffle } = require('./');
 // CONSTANTS
 
 const TEST_RUNNERS = ['ava', 'jest', 'mocha', 'parallel'];
+const DOTS = '. '.repeat(16);
 const testRunners = shuffle(TEST_RUNNERS);
 
 // UTILS
@@ -61,6 +62,10 @@ const runScript = scriptObj => {
   return Date.now() - start;
 };
 
+const logTestTitle = name => {
+  console.log('\n\n', DOTS, '\n   running tests for', name, '\n', DOTS, '\n\n');
+};
+
 // sort, format, and log test results
 const logResults = resultsArr => {
   resultsArr
@@ -98,7 +103,7 @@ const main = () => {
     for (const name of testRunners) {
       const { run } = testData[name];
 
-      console.log('running tests for', name, '\n. . . . . . . . ');
+      logTestTitle(name);
 
       testData[name].executionTime = run();
       testResults.push(testData[name]);
