@@ -184,13 +184,13 @@ Jest is feature-packed, aiming to solve _everything_ in one package, with a focu
 
 <https://mochajs.org/>
 
-Being the most established of the testing frameworks, Mocha enjoys a solid place in the JavaScript community. It's been around since 2011 and is maintained by the OpenJS Foundation and contributors. Mocha supports numerous command-line options and configurations. It's generally used in tandem with external libraries - `assert` or `chai` could take care of your assertion needs and `sinon` could take care of your mocking needs. The `it` and `describe` blocks mentioned by Jest were pioneered by Mocha (along with the `beforeEach`, `afterEach`, and other pre/post hooks). In addition to being able to run in `node`, you can also run tests in the browser giving you full access to the DOM. There's also a dizzying array of test reporting styles (one being Nyan cat.) In its own words:
+Being the most established of the testing frameworks, Mocha enjoys a solid place in the JavaScript community. It's been around since 2011 and is maintained by the [OpenJS Foundation](https://openjsf.org/projects/) (growth stage) and contributors. Mocha supports numerous command-line options and configurations. It's generally used in tandem with external libraries - `assert` or `chai` could take care of your assertion needs and `sinon` could take care of your mocking needs. The `it` and `describe` blocks mentioned by Jest were pioneered by Mocha (along with the `beforeEach`, `afterEach`, and other pre/post hooks). In addition to being able to run in `node`, you can also run tests in the browser giving you full access to the DOM. There's also a dizzying array of test reporting styles (one being Nyan cat.) In its own words:
 
 > Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser, making asynchronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.
 >
 > Mocha is the most-depended-upon module on npm (source: libraries.io)
 >
-> The SuperAgent request library test documentation was generated with Mocha's doc reporter
+> The [SuperAgent request library](https://visionmedia.github.io/superagent/) test documentation was generated with [Mocha's "doc" reporter](https://mochajs.org/#doc)
 
 ### mocha-parallel-tests
 
