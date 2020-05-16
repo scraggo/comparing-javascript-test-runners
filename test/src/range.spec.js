@@ -1,5 +1,3 @@
-// const { expect } = require('chai');
-
 const { range } = require('../../src');
 
 describe('range', function() {
@@ -17,9 +15,9 @@ describe('range', function() {
     expect(res).to.deep.equal([]);
   });
   it('throws error under bad conditions', function() {
-    expect(() => range()).to.throw;
-    expect(() => range(-1)).to.throw;
-    expect(() => range(-2, -1)).to.throw;
-    expect(() => range(2, 1)).to.throw;
+    expect(() => range()).to.throw();
+    expect(() => range(-1)).to.throw();
+    expect(() => range(-2, -1)).to.throw();
+    expect(() => range(2, 1)).to.throw();
   });
 });

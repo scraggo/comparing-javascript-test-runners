@@ -22,6 +22,10 @@ This application is a test-runner that can:
 
 The number and length of the authored tests simulate a "true" test run in a significantly sized enterprise codebase. Each test runner has a template that will run the _same exact_ test blocks and take the _same exact_ amount of time in each block. (This is done with a `setTimeout` with a time that increases with each iteration of the loop that generates the test block.)
 
+To account for a bias in ordering, the scripts corresponding to each test runner are shuffled. This ensures that the suites for each test runner are never called in the same sequence.
+
+![speed-test-results.png](../images/speed-test-results.png)
+
 ## Running the tests
 
 `npm install` to install all the packages.
