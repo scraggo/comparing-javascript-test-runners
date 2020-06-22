@@ -1,9 +1,9 @@
-const { fullCircle } = require('./fullCircle');
+const dateUtils = require('./date');
 const { range } = require('./range');
 const { shuffle } = require('./shuffle');
 
 module.exports = {
-  fullCircle,
+  ...dateUtils,
   range,
   shuffle,
 };

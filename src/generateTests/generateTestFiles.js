@@ -1,5 +1,6 @@
 const { promises: fsPromises } = require('fs');
-const { range } = require('../range');
+
+const { range } = require('../utils');
 const { TEMPLATE_PATHS, TEST_RUNNERS } = require('./config');
 
 const createTestFilename = (num, testDir, testRunner) =>

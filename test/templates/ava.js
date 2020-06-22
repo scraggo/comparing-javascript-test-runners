@@ -1,6 +1,7 @@
 const test = require('ava');
 
-const { fullCircle, range } = require('../../src');
+const { fullCircle } = require('../../src/fullCircle');
+const { range } = require('../../src/utils');
 
 test('ava fullCircle', t => {
   range(0, 25).forEach(num => {

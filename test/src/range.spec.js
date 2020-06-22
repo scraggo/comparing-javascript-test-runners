@@ -1,4 +1,4 @@
-const { range } = require('../../src');
+const { range } = require('../../src/utils');
 
 describe('range', function() {
   it('returns range array length 1', function() {

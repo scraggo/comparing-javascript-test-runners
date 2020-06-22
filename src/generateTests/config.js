@@ -5,7 +5,7 @@ const TEST_RUNNERS = [AVA, JEST, MOCHA];
 
 // relative to root
 const TEST_DIR = './test';
-const TEMPLATE_DIR = './src/generateTests/templates';
+const TEMPLATE_DIR = './test/templates';
 
 const getTemplatePath = testRunner => `${TEMPLATE_DIR}/${testRunner}.js`;
 const getDestPath = testRunner => `${TEST_DIR}/${testRunner}`;

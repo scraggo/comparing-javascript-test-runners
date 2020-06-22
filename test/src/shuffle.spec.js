@@ -1,4 +1,4 @@
-const { range, shuffle } = require('../../src');
+const { range, shuffle } = require('../../src/utils');
 
 describe('shuffle', function() {
   it('returns array of same length', function() {
