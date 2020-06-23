@@ -1,11 +1,15 @@
 const execa = require('execa');
-const { shuffle } = require('./');
+
+const { getDateTime, shuffle } = require('./utils');
 
 // CONSTANTS
 
 const TEST_RUNNERS = ['ava', 'jest', 'mocha', 'parallel'];
 const DOTS = '. '.repeat(16);
 const testRunners = shuffle(TEST_RUNNERS);
+
+// just run one for now
+// const testRunners = shuffle(TEST_RUNNERS).slice(0, 1);
 
 // UTILS
 
@@ -66,6 +70,13 @@ const logTestTitle = name => {
   console.log('\n\n', DOTS, '\n   running tests for', name, '\n', DOTS, '\n\n');
 };
 
+const logResultsHeader = () => {
+  console.log(`\n${'-*'.repeat(20)}`);
+  console.log(`RESULTS ${getDateTime()}`);
+  console.log('order:', testRunners);
+  console.log('');
+};
+
 // sort, format, and log test results
 const logResults = resultsArr => {
   resultsArr
@@ -92,9 +103,6 @@ const testData = testRunners.reduce((acc, name) => {
   return acc;
 }, {});
 
-// just run one for now
-// const sliced = testRunners.slice(0, 1);
-
 const main = () => {
   try {
     const testResults = [];
@@ -109,10 +117,7 @@ const main = () => {
       testResults.push(testData[name]);
     }
 
-    console.log(`-*-*-*-*-*-*-*-*-*-*-
-      RESULTS
--*-*-*-*-*-*-*-*-*-*-\n`);
-    console.log('order:', testRunners, '\n');
+    logResultsHeader();
     logResults(testResults);
   } catch (error) {
     console.error(error);

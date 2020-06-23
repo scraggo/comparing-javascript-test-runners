@@ -14,4 +14,4 @@ const fullCircle = (self, wait) => {
   return self;
 };
 
-module.exports = { fullCircle };
+module.exports = { fullCircle, main: fullCircle };
