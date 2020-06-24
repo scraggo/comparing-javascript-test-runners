@@ -20,6 +20,8 @@ This application is a test-runner that can:
 - create the same tests that are compatible with the testing frameworks above
 - run those tests with a comparison of the times it takes to execute them
 
+My goal was to create something similar to the [TodoMVC project](http://todomvc.com/) which compared the same "todo" app with different frameworks - React, Backbone, Ember, Vanilla, etc. For my test runner - I generate the same tests but with syntax that’s compatible with the test runners, capture the times it took to run, and output a report at the end.
+
 The number and length of the authored tests simulate a "true" test run in a significantly sized enterprise codebase. Each test runner has a template that will run the _same exact_ test blocks and take the _same exact_ amount of time in each block. (This is done with a `setTimeout` with a time that increases with each iteration of the loop that generates the test block.)
 
 To account for a bias in ordering, the scripts corresponding to each test runner are shuffled. This ensures that the suites for each test runner are never called in the same sequence.

@@ -14,7 +14,7 @@ To generate the speed metrics in the article, I created a node application (part
     - [Goals](#goals)
   - [Testing in general](#testing-in-general)
     - [Documentation: writing tests that outline the functionality of the application](#documentation-writing-tests-that-outline-the-functionality-of-the-application)
-    - [Philosophy: "What" should we test? What level of "granularity" are we aiming for?](#philosophy-%22what%22-should-we-test-what-level-of-%22granularity%22-are-we-aiming-for)
+    - [Philosophy: "What" should we test? What level of "granularity" are we aiming for?](#philosophy-what-should-we-test-what-level-of-granularity-are-we-aiming-for)
     - [State: the pros and cons of sharing state between tests](#state-the-pros-and-cons-of-sharing-state-between-tests)
     - [Coverage: the extent to which one should measure test coverage](#coverage-the-extent-to-which-one-should-measure-test-coverage)
     - [Tips](#tips)
@@ -32,7 +32,7 @@ To generate the speed metrics in the article, I created a node application (part
     - [mocha-parallel-tests](#mocha-parallel-tests)
     - [Popularity and Community Comparison](#popularity-and-community-comparison)
     - [Speed Comparison](#speed-comparison)
-      - [What do "serial" and "parallel" mean?](#what-do-%22serial%22-and-%22parallel%22-mean)
+      - [What do "serial" and "parallel" mean?](#what-do-serial-and-parallel-mean)
       - [Benchmarks](#benchmarks)
     - [Ease of Use Comparison](#ease-of-use-comparison)
     - [Amount of necessary configuration/dependencies](#amount-of-necessary-configurationdependencies)
@@ -40,7 +40,7 @@ To generate the speed metrics in the article, I created a node application (part
       - [Running the tests](#running-the-tests)
     - [Failure Reporting and Debugging Comparison](#failure-reporting-and-debugging-comparison)
     - [Works with your framework and environment of choice (React, Redux, Electron, etc) Comparison](#works-with-your-framework-and-environment-of-choice-react-redux-electron-etc-comparison)
-    - [Full Comparison (with "Nice to Haves")](#full-comparison-with-%22nice-to-haves%22)
+    - [Full Comparison (with "Nice to Haves")](#full-comparison-with-nice-to-haves)
   - [Recommendations](#recommendations)
   - [Conclusion](#conclusion)
     - [Want to contribute?](#want-to-contribute)
@@ -210,18 +210,28 @@ Being the most established of the testing frameworks, Mocha enjoys a solid place
 
 Now that we know a bit about each framework, lets look at some of their popularity, publish frequency, and other community metrics.
 
-|                      | Weekly Downloads | Last Publish | Publishes in 1 Year | Contributors |
-| -------------------- | ---------------- | ------------ | ------------------- | ------------ |
-| Jest                 | 7.2 million      | 2020-05-05   | 27                  | 1083         |
-| Mocha                | 4.3 million      | 2020-04-24   | 11                  | 439          |
-| AVA                  | 227,179          | 2020-05-08   | 20                  | 243          |
-| mocha-parallel-tests | 18,097           | 2020-02-08   | 4                   | 14           |
+![chart-popularity-slide](images/chart-popularity-slide.png)
+![chart-downloads-slide](images/chart-downloads-slide.png)
+
+> Charts made with <https://npm-stat.com/charts.html?package=ava&package=jest&package=mocha&from=2015-01-01&to=2020-05-27>
+
+Overall, we can see that _all_ the frameworks are rising in popularity. To me, this indicates that more people are writing JavaScript applications and testing them - which is quite exciting. The fact that none of them are on a downward trend makes all of them viable in this category.
+
+
+|                      | Weekly Downloads \* | Last Publish | Publishes in 1 Year | Contributors |
+| -------------------- | ------------------- | ------------ | ------------------- | ------------ |
+| Jest                 | 7.2 million         | 2020-05-05   | 27                  | 1083         |
+| Mocha                | 4.3 million         | 2020-04-24   | 11                  | 439          |
+| AVA                  | 227,179             | 2020-05-08   | 20                  | 243          |
+| mocha-parallel-tests | 18,097              | 2020-02-08   | 4                   | 14           |
+
+\* Weekly Downloads as of May 15, 2020
 
 🥇Jest is clearly the most popular framework with 7.2 million weekly downloads. It was published most recently and is updated very frequently. Its popularity can be partially attributed to the popularity of the React library. Jest is shipped with `create-react-app` and is recommended for use in React's documentation.
 
-🥈Mocha comes in second place with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is the test runner of many, many applications.
+🥈Mocha comes in second place with 4.3 million weekly downloads. It was the de facto standard long before Jest hit the scene and is the test runner of many, many applications. It isn't published as frequently as the other two which I believe is a testament to it being tried, true, and more stable.
 
-🥉AVA has 227,179 weekly downloads, an order of magnitude fewer than the most popular frameworks. This may be due to its (arguably niche) focus on minimalism or it having a small team that doesn't have the resources to promote the library.
+🥉AVA has 227,179 weekly downloads, an order of magnitude fewer than the most popular frameworks. It is published frequently, which positively signals a focus on improvement and iteration. This may be due to its (arguably niche) focus on minimalism or it having a small team that doesn't have the resources to promote the library.
 
 `mocha-parallel-tests` has 18,097 weekly downloads and doesn't enjoy as frequent updates as the major three. It's extremely new and not a framework.
 
@@ -269,7 +279,7 @@ To generate the speed metrics in the article, I created a node application that 
 
 A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll only be considering the speeds relative to each other.
 
-🥇`mocha-parallel-tests` is the clear winner in this run. 🥈AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) 🥉Jest is also fast, but seems to have a bit more overhead than the other two.
+🥇`mocha-parallel-tests` is the clear winner in this run (and most runs). 🥈AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) 🥉Jest is also fast, but seems to have a bit more overhead than the other two.
 
 Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is your most important criteria (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
 
@@ -283,11 +293,11 @@ I'll split "ease of use" into a few categories:
 
 ### Amount of necessary configuration/dependencies
 
-|                              | Configuration          | Dependencies             |
-| ---------------------------- | ---------------------- | ------------------------ |
-| Jest                         | Everything is included | built-in                 |
-| AVA                          | Sensible defaults      | some externals necessary |
-| Mocha & mocha-parallel-tests | Many, many options     | most externals necessary |
+|                              | Configuration                          | Dependencies                                                                         |
+| ---------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------ |
+| Jest                         | close-to-zero-config: lots of defaults | All dependencies included: snapshot testing, mocking, coverage reporting, assertions |
+| AVA                          | Sensible defaults                      | some externals necessary. Included: snapshot testing, assertions                     |
+| Mocha & mocha-parallel-tests | Many, many options                     | most externals necessary (all if in-browser)                                         |
 
 🥇Jest takes the cake in this department. Using its defaults wherever possible, you could have close to zero configuration.
 
@@ -319,7 +329,7 @@ I'll split "ease of use" into a few categories:
 - Good documentation (slightly opaque and a lot to read through), lots of tutorials and examples (in and out of Mocha's docs)
 - Assertions\*, coverage reporting, snapshot tests, mocking modules and libraries (everything) must be imported from elsewhere
 
-\* node's built-in `assert` is commonly used with Mocha for assertions. While it's not built into Mocha, it can be easily imported: `const assert = require('assert')`.
+\* node's built-in `assert` is commonly used with Mocha for assertions. While it's not built into Mocha, it can be easily imported: `const assert = require('assert')`. If testing in-browser, you wouldn't have access to `assert` and would have to use a library like `chai`.
 
 For mocha-parallel-tests, run tests as you would with Mocha. There is a caveat:
 
@@ -336,7 +346,7 @@ For mocha-parallel-tests, run tests as you would with Mocha. There is a caveat:
 Mocha's influence on test-writing is undeniable. From [Mocha's getting started section](https://mochajs.org/#getting-started), we can see how tests are organized in nested `describe` blocks that can contain any number of `it` blocks which make test assertions.
 
 ```js
-const assert = require('assert');
+const assert = require('assert'); // only works in node
 describe('Array', function() {
   describe('#indexOf()', function() {
     it('should return -1 when the value is not present', function() {
@@ -349,7 +359,7 @@ describe('Array', function() {
 [Chai's `expect`](https://www.chaijs.com/) is commonly used instead of assert:
 
 ```js
-const { expect } = require('chai');
+const { expect } = require('chai'); // works in both node and browser
 
 it('should return -1 when the value is not present', function() {
   expect([1, 2, 3].indexOf(4)).to.equal(-1);
@@ -397,11 +407,11 @@ Since the frameworks have drastically different styles and similar capabilities,
 
 |                              | Summary                        |
 | ---------------------------- | ------------------------------ |
-| Jest                         | interactive CLI                |
+| Jest                         | interactive CLI or GUI         |
 | Mocha & mocha-parallel-tests | non-interactive CLI or browser |
 | AVA                          | non-interactive CLI            |
 
-🥇Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze in its interactive CLI.
+🥇Jest has an incredible interactive command line interface. (Using [Majestic](https://github.com/Raathigesh/majestic/) adds a web-based GUI to the experience.) There are numerous options for choosing which tests run and updating snapshots - all keyboard-driven. It watches for test file changes in watch mode and _only runs the tests that have been updated_. There isn't as much of a need to use `.only` because filtering terms is a breeze.
 
 ![Jest CLI1](images/jest-cli1.png)
 ![Jest CLI2](images/jest-cli2.png)
@@ -490,7 +500,7 @@ Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = 
 As you can see, all the frameworks are incredibly robust for most testing needs. However, if you picked one at random, it might not work for a specific use case. It's not an easy choice, but here's how I'd break it down:
 
 - 🏅Mocha is recommended if you want your tests to run in any environment. It's incredibly community-supported and is extend-able with your favorite 3rd-party packages. Using `mocha-parallel-tests` would give you a speed advantage.
-- 🏅Jest is recommended if you want a popular framework that has everything built in with very little configuration necessary. It's the jack-of-all-trades of test runners. It has a delightful command line experience. Finally, it's an excellent pair with React.
+- 🏅Jest is recommended if you want to get tests up and running quickly. It has everything built in and requires very little configuration. The command line and GUI experience is unmatched. Finally, it's the most popular and makes an excellent pair with React.
 - 🏅AVA is recommended if you want a minimalist framework with no globals. AVA is fast, easy to configure, and you get ES-Next transpilation out of the box. You don't want hierarchical `describe` blocks and you want to support a smaller project.
 
 ## Conclusion
