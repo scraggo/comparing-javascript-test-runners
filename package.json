@@ -9,20 +9,20 @@
     "clean": "rm ./test/{ava,jest,mocha}/*fullCircle* || echo 'No tests to remove.'",
     "lint": "eslint . --ext .js",
     "make-tests": "node ./src/generateTests",
-    "test": "nyc mocha './test/src/*.spec.js'",
+    "test": "nyc mocha \"test/src/*.spec.js\" --require testSetup.js --parallel",
     "test-all": "node src/runAllTests",
-    "test-ava": "time ava './test/ava/*.spec.js'",
+    "test-ava": "ava \"test/ava/*.spec.js\"",
+    "test-ava-time": "time ava \"test/ava/*.spec.js\"",
     "test-jest": "jest",
-    "test-mocha": "mocha './test/mocha/*.spec.js'",
-    "test-parallel": "mocha-parallel-tests './test/mocha/*.spec.js' --timeout=10000"
+    "test-mocha": "mocha \"test/mocha/*.spec.js\"",
+    "test-parallel": "mocha \"test/mocha/*.spec.js\" --parallel"
   },
   "dependencies": {
     "ava": "^3.1.0",
     "chai": "^4.2.0",
     "execa": "^4.0.0",
     "jest": "^25.1.0",
-    "mocha": "^7.1.2",
-    "mocha-parallel-tests": "^2.2.2",
+    "mocha": "^8.0.1",
     "nyc": "^15.0.0"
   },
   "devDependencies": {
