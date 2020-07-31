@@ -4,7 +4,7 @@
 
 <https://github.com/scraggo/comparing-javascript-test-runners>
 
-This article is a comparison of the AVA, Jest, Mocha, and `mocha-parallel-tests` JavaScript test runners. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md)
+This article is a comparison of the AVA, Jest, and Mocha JavaScript test runners. [Permalink](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/README.md)
 
 To generate the speed metrics in the article, I created a node application (part of this repo) that runs tests in all the frameworks listed above. [See the documentation here](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/docs/test-runner.md).
 
@@ -29,7 +29,7 @@ To generate the speed metrics in the article, I created a node application (part
     - [AVA](#ava)
     - [Jest](#jest)
     - [Mocha](#mocha)
-    - [mocha-parallel-tests](#mocha-parallel-tests)
+      - [mocha-parallel-tests](#mocha-parallel-tests)
     - [Popularity and Community Comparison](#popularity-and-community-comparison)
     - [Speed Comparison](#speed-comparison)
       - [What do "serial" and "parallel" mean?](#what-do-serial-and-parallel-mean)
@@ -57,7 +57,6 @@ In recent years, JavaScript has become a more robust language thanks to the stea
 - AVA - <https://github.com/avajs/ava>
 - Jest - <https://jestjs.io/>
 - Mocha - <https://mochajs.org/>
-  - and an interesting wrapper called mocha-parallel-tests <https://github.com/mocha-parallel/mocha-parallel-tests>
 
 ### Goals
 
@@ -192,9 +191,13 @@ Being the most established of the testing frameworks, Mocha enjoys a solid place
 >
 > The [SuperAgent request library](https://visionmedia.github.io/superagent/) test documentation was generated with [Mocha's "doc" reporter](https://mochajs.org/#doc)
 
-### mocha-parallel-tests
+_Update [8.0.0 / 2020-06-10](https://github.com/mochajs/mocha/blob/master/CHANGELOG.md#800--2020-06-10): Mocha 8 has built-in support for running tests in parallel!_
+
+#### mocha-parallel-tests
 
 <https://github.com/mocha-parallel/mocha-parallel-tests>
+
+⚠️ Important note: As of [Mocha 8x](https://github.com/mochajs/mocha/blob/master/CHANGELOG.md#800--2020-06-10), there's built-in support for running tests in parallel. In case you can't currently upgrade to mocha 8x, `mocha-parallel-tests` is a viable choice!
 
 `mocha-parallel-tests` is not a testing framework. It's a wrapper over Mocha designed to significantly speed it up. It's new in 2019 and has a small team. I'll go into detail on why I'm including it here (and what "parallel" means) in the "speed" portion of this article. From the readme:
 
@@ -216,7 +219,6 @@ Now that we know a bit about each framework, lets look at some of their populari
 > Charts made with <https://npm-stat.com/charts.html?package=ava&package=jest&package=mocha&from=2015-01-01&to=2020-05-27>
 
 Overall, we can see that _all_ the frameworks are rising in popularity. To me, this indicates that more people are writing JavaScript applications and testing them - which is quite exciting. The fact that none of them are on a downward trend makes all of them viable in this category.
-
 
 |                      | Weekly Downloads \* | Last Publish | Publishes in 1 Year | Contributors |
 | -------------------- | ------------------- | ------------ | ------------------- | ------------ |
@@ -270,18 +272,26 @@ For all of the frameworks with parallel capabilities, only separate test files a
 
 To generate the speed metrics in the article, I created a node application that runs tests in all the frameworks listed above. [The documentation for it](https://github.com/scraggo/comparing-javascript-test-runners/blob/master/docs/test-runner.md) explains how I wrote and ran the tests. The aim was to simulate a "true" test run in a significantly sized enterprise codebase. Here are the results (`node` version 12):
 
-|                      | Speed | Type     |
-| -------------------- | ----- | -------- |
-| mocha-parallel-tests | 7.3s  | parallel |
-| AVA                  | 9.6s  | parallel |
-| Jest                 | 12.5s | parallel |
-| Mocha                | 16.2s | serial   |
+|                        | Speed | Type     |
+| ---------------------- | ----- | -------- |
+| mocha 8.x `--parallel` | 5.3s  | parallel |
+| mocha-parallel-tests   | 7.3s  | parallel |
+| AVA                    | 9.6s  | parallel |
+| Jest                   | 12.5s | parallel |
+| Mocha                  | 16.2s | serial   |
 
 A caveat with all benchmarking tests: the hardware environment (the make, model, RAM, processes running, etc) will affect measured results. For this reason, we'll only be considering the speeds relative to each other.
 
-🥇`mocha-parallel-tests` is the clear winner in this run (and most runs). 🥈AVA is close behind (and actually ran faster than `mocha-parallel-tests` in a few of the runs.) 🥉Jest is also fast, but seems to have a bit more overhead than the other two.
+🥇Mocha 8.x with `--parallel` enabled is the fastest of the frameworks in this run (and most runs.) (Mocha versions prior to 8.x can't enable this option.)
 
-Mocha lags far behind the parallel runners - which is to be expected because it runs tests in serial. If speed is your most important criteria (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
+- [Mocha's docs on the new flag](https://mochajs.org/#-parallel-p)
+- [This is a great resource on getting up and running with this new flag.](https://developer.ibm.com/technologies/node-js/articles/parallel-tests-mocha-v8/)
+
+🥈`mocha-parallel-tests` and AVA are close behind (AVA actually ran faster than `mocha-parallel-tests` in a few of the runs.)
+
+🥉Jest is also fast, but seems to have a bit more overhead than the other two.
+
+Mocha in serial mode lags far behind the parallel runners - which is to be expected because it tests must take "real" time to execute, one after the other. If speed is your most important criteria (and its drawbacks are not an issue), you'll see a 200-1000% increase in test speed using `mocha-parallel-tests` instead (depending on your machine, `node` version, and the tests themselves).
 
 ### Ease of Use Comparison
 
@@ -476,13 +486,13 @@ AVA
 
 ### Full Comparison (with "Nice to Haves")
 
-Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = `mocha-parallel-tests`)
+Let's recap our findings and fill in some gaps with our "nice to haves." (M8 = Mocha 8.x with `--parallel` enabled. MPT = `mocha-parallel-tests`)
 
 | Feature                                                                                                       | Notes                                                                                                                                                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Popularity                                                                                                    | Jest - 1st place. Mocha - 2nd place. AVA - 3rd place. MPT - 4th place.                                                                                                                                                                                 |
 | Maintenance                                                                                                   | Mocha - 1st place. AVA - 2nd place. Jest - 3rd place. MPT - 4th place.                                                                                                                                                                                 |
-| Speed                                                                                                         | MPT - 1st place. AVA - 2nd place. Jest - 3rd place. Mocha - 4th place.                                                                                                                                                                                 |
+| Speed                                                                                                         | M8/MPT - 1st place. AVA - 2nd place. Jest - 3rd place. Mocha - 4th place.                                                                                                                                                                              |
 | Amount of necessary configuration/dependencies                                                                | Jest - 1st place. AVA - 2nd place. Mocha - 3rd place. MPT - 4th place.                                                                                                                                                                                 |
 | Organization strategies: `describe` and `it` blocks                                                           | Mocha and Jest use these, AVA does not (omits all test globals)                                                                                                                                                                                        |
 | Running the tests                                                                                             | Jest - 1st place. Mocha - 2nd place. MPT - 3rd place. AVA - 4th place.                                                                                                                                                                                 |
@@ -499,7 +509,7 @@ Let's recap our findings and fill in some gaps with our "nice to haves." (MPT = 
 
 As you can see, all the frameworks are incredibly robust for most testing needs. However, if you picked one at random, it might not work for a specific use case. It's not an easy choice, but here's how I'd break it down:
 
-- 🏅Mocha is recommended if you want your tests to run in any environment. It's incredibly community-supported and is extend-able with your favorite 3rd-party packages. Using `mocha-parallel-tests` would give you a speed advantage.
+- 🏅Mocha is recommended if you want your tests to run in any environment. It's incredibly community-supported and is extend-able with your favorite 3rd-party packages. Using `mocha-parallel-tests` (or 8.x with `--parallel` enabled) would give you a speed advantage.
 - 🏅Jest is recommended if you want to get tests up and running quickly. It has everything built in and requires very little configuration. The command line and GUI experience is unmatched. Finally, it's the most popular and makes an excellent pair with React.
 - 🏅AVA is recommended if you want a minimalist framework with no globals. AVA is fast, easy to configure, and you get ES-Next transpilation out of the box. You don't want hierarchical `describe` blocks and you want to support a smaller project.
 
@@ -526,6 +536,8 @@ More on Mocha:
 
 - <https://devdocs.io/mocha/>
 - [The Ultimate Unit Testing Cheat-sheet For Mocha, Chai and Sinon](https://gist.github.com/yoavniran/1e3b0162e1545055429e)
+- [Mocha's docs on the new --parallel flag](https://mochajs.org/#-parallel-p)
+- [This is a great resource on getting up and running with --parallel](https://developer.ibm.com/technologies/node-js/articles/parallel-tests-mocha-v8/)
 
 More on Jest:
 
