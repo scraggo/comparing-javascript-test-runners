@@ -527,7 +527,7 @@ Articles:
 
 - [Node.js & JavaScript Testing Best Practices (2020) - Medium](https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347)
 - [An Overview of JavaScript Testing in 2020 - Medium](https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870)
-- <https://npmcompare.com/compare/ava,jest,mocha,mocha-parallel-tests>
+- <https://npm-compare.com/ava,jest,mocha,mocha-parallel-tests>
 - <https://www.slant.co/versus/12696/12697/~mocha_vs_jest>
 - <https://stackshare.io/stackups/ava-vs-mocha>
 - <https://raygun.com/blog/javascript-unit-testing-frameworks/>
